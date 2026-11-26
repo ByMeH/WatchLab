@@ -14,7 +14,7 @@ htmlcov/
 /bin/
 /WatchLab-Release.zip
 
-# Kilo and AI-agent working materials
+# Kilo
 /.kilo/
 /AGENTS.md
 /README-KILO-SETUP.md

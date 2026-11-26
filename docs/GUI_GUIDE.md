@@ -1,184 +1,310 @@
 # WatchLab Desktop — GUI Guide
 
-WatchLab Desktop is a Tkinter frontend for the existing WatchLab research bench.
-It unifies dashboard, demo control, event browsing, experiment overview and
-analytics in one window. It is a **frontend and orchestrator only**:
+WatchLab Desktop is a Tkinter frontend for the WatchLab research bench.
+It provides a graphical interface for inspecting experiment results,
+running the isolated demonstration, browsing events and viewing analytics.
 
-- Go (bin/watchlab) remains the backend that talks to etcd;
-- `scripts/demo.py` remains the demo orchestrator (the GUI starts it as a
-  subprocess and parses its output; it does not re-implement it);
-- `scripts/analyze_results.py` remains the analytics tool (the GUI's
-  Recalculate button runs it as a subprocess).
+The GUI is a frontend and process orchestrator. It does not reimplement
+the Go backend, the demonstration or the analysis pipeline.
+
+- Go (`bin/watchlab`) communicates with etcd and implements Producer,
+  Watch and Recover operations.
+- `scripts/demo.py` runs the isolated end-to-end demonstration.
+- `scripts/analyze_results.py` aggregates existing experimental results
+  and generates analytical reports.
+- The GUI starts these Python scripts as subprocesses when required.
+
+> **Platform status:** The current implementation is Linux/POSIX-oriented.
+> Windows 10/11 and macOS have not been ported or validated.
 
 ## Requirements
 
-- Python 3 with Tkinter (standard library; no extra pip dependencies).
-  Debian/Ubuntu: `sudo apt install python3-tk`.
-- The project venv (`.venv`) is used automatically by the run instructions
-  below; plain `python3` works too if it has Tkinter.
-- `bin/watchlab` (build with `go build -o bin/watchlab .` when missing or stale;
-  the Dashboard shows its status).
-- `etcd` / `etcdctl` on PATH for the demo and the etcd health check.
+- Python 3.10 or newer.
+- Tkinter (Python standard library). On Debian/Ubuntu:
+  `sudo apt install python3-tk`.
+- Go 1.27.0 or newer, as required by `go.mod`.
+- `etcd` and `etcdctl` available in PATH for the demonstration and
+  the Dashboard health check.
+- `matplotlib` is optional. It is needed to generate PNG charts;
+  CSV and JSON analysis can still be produced without it.
+- `xdg-open` is used on Linux to open charts and the GUI log directory.
 
-## Run
+The project virtual environment is not activated automatically.
+Activate it before running the GUI, or explicitly use its Python interpreter.
 
-From the project root:
+The `demo.py` script checks the environment and builds `bin/watchlab`
+when the binary is missing or older than the Go source files.
+
+Manual build:
 
 ```bash
-python scripts/gui.py          # or: .venv/bin/python scripts/gui.py
+mkdir -p bin
+go build -o bin/watchlab .
 ```
 
-## Pages
 
-### Dashboard
-Real values only, read from files and live checks: Python and Go versions,
-`bin/watchlab` status (ok / stale / missing — staleness compares binary mtime
-with `main.go` / `recover.go` / `go.mod`), etcd reachability
-(`etcdctl endpoint health`, checked on demand), number of completed series and
-selected series (the nine-suite main sample), verified events count from
-`reports/analysis/event_validation.json`, and the latest demo result
-(`/tmp/watchlab-demo-*/demo-summary.json`). Quick actions: Run demo,
-Recalculate analytics, Refresh.
 
-### Recovery
-Controls `python scripts/demo.py` via a managed subprocess. Shows the ten
-recovery stages as they actually happen (parsed from demo.py output markers —
-no stage is shown as done before its marker arrives), a live log with
-timestamps, and a compact run summary. Stage list: Starting isolated etcd →
-Watch created → Producer started → Client disconnected → Reconnect with L+1 →
-Compaction executed → Compaction detected → Range snapshot created → Watch
-restarted with R+1 → Validation completed. Stop button sends SIGINT/SIGTERM to
-the demo process tree only (the same sequence demo.py itself uses for its
-children). The demo is safe: it runs its own isolated etcd on a free port with
-a throwaway data dir under /tmp.
+Run
+Run from the project root:
+python3 -m venv .venv
+source .venv/bin/activate
+python scripts/gui.py
 
-After a finished run the card header offers **Inspect recovered state**. The
-inspector opens a separate window over the page (no new sidebar entry) and
-shows the state file that the Go `recover` command saved
-(`/tmp/watchlab-demo-*/compaction/state.json`, resolved from the finished
-demo's `demo-summary.json`, falling back to the newest file). It never
-queries etcd — only the saved file is read. The window shows:
 
-- Snapshot revision (R) — the revision of the last Range snapshot;
-- Last applied revision (L) — the checkpoint of the last fully applied
-  revision (these two are always shown as separate values);
-- Current keys — the size of the current state map (not a historical event
-  count);
-- Data, key+value bytes — the `data_bytes` field (sum of key+value UTF-8
-  lengths, not the on-disk JSON size; the file size on disk and
-  `updated_at` are shown next to the state file path);
-- a note stating whether Watch events were applied after the snapshot
-  (checkpoint delta L−R and how many keys have `mod_revision > R`).
+Alternatively, without activating the environment:
+.venv/bin/python scripts/gui.py
 
-Below the metrics is a table (key / mod_revision / value) with a live
-case-insensitive key-substring search and a scope filter relative to the
-snapshot revision: all keys, changed after the snapshot (`mod_revision > R`,
-shown in violet) or from the snapshot (`mod_revision ≤ R`). Values are
-truncated in the table; double-click a row (or "View full value") opens the
-full value with a pretty-printed JSON view and a "copy value" button that
-copies the raw string. A missing, corrupted or unexpected state file is
-reported in a banner instead of a table; the table caps at the first 500
-matching rows and the counter always shows the true total. Refresh re-reads
-the same path after a new demo run.
 
-### Events
-Paginated table of saved JSONL events for one suite at a time. Three groups:
-Producer acknowledgements, Watch events, Recover events. Filters: event type,
-revision (exact), key substring, run_id substring. Records are streamed line by
-line; never the whole file. The page size default is 100 rows.
+Pages
+The main window contains six pages in the sidebar.
+Dashboard
+Displays information collected from project files and environment checks:
+- Go backend binary status: ok, stale or missing.
+  Staleness is determined by comparing the binary modification time
+  with main.go, recover.go and go.mod.
+- Python and Go toolchain versions.
+- Reachability of the default etcd endpoint (127.0.0.1:2379),
+  checked through etcdctl endpoint health.
+- Number of completed experiment series.
+- Number of selected series in the fixed nine-suite analytical sample.
+- Number of verified events from
+  reports/analysis/event_validation.json.
+- Result of the most recent demonstration, read from its
+  demo-summary.json.
+Quick actions:
+- Run demo starts the isolated demonstration.
+- Refresh updates Dashboard information.
+- Analyze results starts the analysis script and opens the Logs page.
+The ordinary etcd health indicator refers to the default endpoint.
+It is independent of the temporary etcd instance used by the demo.
+Recovery
+Controls scripts/demo.py through a managed subprocess.
 
-### Experiments
-Table of existing series (one row per suite x scenario): suite_id,
-events_per_phase, scenario, observed/missing/duplicates/unexpected, status.
-The nine-suite main sample is marked `ok`; suites outside it are labelled
-`excluded (not in selected nine)`; suites without a valid summary.json are
-`excluded (incomplete)` (e.g. `auto-20261119-230935`). The GUI never starts
-experiments: compaction acts on the whole MVCC backend of the target etcd.
+The page provides:
+- Run demo and Stop buttons.
+- Configurable event count, event interval and timeout.
+- Ten recovery stages.
+- Live demonstration output with timestamps.
+- A summary of the completed run.
+The displayed stages are:
+1. Starting isolated etcd.
+2. Watch created.
+3. Producer started.
+4. Client disconnected.
+5. Reconnect with L+1.
+6. Compaction executed.
+7. Compaction detected.
+8. Range snapshot created.
+9. Watch restarted with R+1.
+10. Validation completed.
+Stage completion is driven by output markers from demo.py.
+A stage is not marked complete before the corresponding marker is received.
 
-### Analytics
-Reads `reports/analysis/`: group statistics table (with a metric filter),
-PNG charts with a viewer button (opens the system image viewer), and the
-metric definitions from `reports/analysis/README.md`. Recalculate runs
-`python scripts/analyze_results.py` as a subprocess and refreshes the page.
+The demonstration starts its own temporary single-member etcd instance
+on free localhost ports and uses a separate temporary data directory.
+It does not compact the user's existing etcd instance.
 
-### Logs
-Table of all GUI-started processes with status, exit code, duration and log
-file; live output pane (monospaced, timestamps, auto-scroll toggle), Stop
-selected button, and a link to the log directory (`logs/gui/`, one file per
-run). Only GUI-started processes appear here and only they can be stopped.
+The Stop button requests interruption of the GUI-started demo process.
+If graceful shutdown does not finish, the GUI escalates termination
+for its own dedicated process group. The demo manages cleanup of the
+child processes it created. Pre-existing etcd and WatchLab processes
+are not intentionally targeted.
+Recovery State Inspector
+After a demo has produced a recovery state file, the Recovery page
+can open Inspect recovered state.
 
-## Process handling
+The Inspector opens in a separate window. It is not a seventh sidebar page.
 
-- Long commands use `subprocess.Popen` with a reader thread; output reaches
-  the UI through a thread-safe queue and is drained on the UI thread only
-  (Tkinter is never touched from worker threads).
-- Closing the window stops every GUI-started process (SIGINT → SIGTERM →
-  SIGKILL on the child's own process group) and waits for the reader threads.
-  Pre-existing etcd or WatchLab processes are never touched.
-- All subprocess output is saved to `logs/gui/<name>-<timestamp>.log`.
+It reads the state.json file saved by the Go Recover command.
+The path is taken from the demo summary when available; otherwise,
+the application searches for the newest matching recovery state file.
 
-## Failure handling
+The Inspector does not query etcd. It only reads the saved file.
 
-- Missing Tkinter: clear message with the system package name, exit code 2.
-- Missing / stale / unbuildable Go binary: shown on the Dashboard; the demo
-  refuses to start with an explanatory status.
-- Unreachable etcd: health check reports the etcdctl error text; the demo
-  still runs because it starts its own isolated etcd.
-- demo.py failure: the exit code and the last log lines are shown; the run
-  summary is read from demo-summary.json when written.
-- Missing / corrupted / unexpected recovery state.json: the Recovery State
-  Inspector shows a banner naming the cause and the path instead of a table;
-  it never queries etcd to "fix" the file.
-- Corrupted summary.json / JSONL / CSV: corrupt lines are skipped (truncated
-  final lines tolerated like in run_experiments.py); unreadable summaries
-  make the suite "excluded" instead of crashing the GUI.
-- Missing charts: the Analytics page shows an empty state instead of an error.
+Displayed information:
+- Snapshot revision (R): revision of the last Range snapshot.
+- Last applied revision (L): checkpoint of the last fully applied revision.
+- Current keys: number of keys in the current local state map.
+- Data, key+value bytes: sum of UTF-8 key and value lengths,
+  taken from data_bytes.
+- State file size and updated_at.
+The Inspector also explains whether Watch events were applied after
+the snapshot. It uses the checkpoint difference L−R and key
+mod_revision values.
 
-## Architecture
+The key table contains:
+- Key.
+- mod_revision.
+- Value preview.
+Available filters:
+- Case-insensitive key substring search.
+- All keys.
+- Keys changed after the snapshot (mod_revision > R).
+- Keys from the snapshot (mod_revision <= R).
+Values are truncated in the table. Double-click a row or use
+View full value to open the full value. The value dialog provides
+a pretty-printed JSON view when possible and a button to copy the
+raw string.
 
-```
-scripts/gui.py          entry point (Tkinter availability check)
+The table displays at most 500 matching rows. Its counter reports
+the total number of matching keys.
+
+Missing, corrupted, unreadable or unexpected state files are reported
+in a banner instead of being displayed as a normal table.
+
+The Inspector's Refresh button rereads the currently selected file.
+To inspect a newer demo run, close the Inspector and reopen it from
+the Recovery page after that run has finished.
+Events
+Displays saved JSONL records for one selected experiment suite.
+
+Records are grouped into:
+- Producer acknowledgements.
+- Watch events.
+- Recover events.
+Filters include:
+- Event type.
+- Exact revision.
+- Key substring.
+- run_id substring.
+Records are read line by line rather than loading an entire JSONL file
+into memory. The default page size is 100 rows.
+Experiments
+Displays existing experiment series, with one row per suite and scenario.
+
+The table includes:
+- suite_id.
+- events_per_phase.
+- Scenario.
+- Observed events.
+- Missing events.
+- Duplicate events.
+- Unexpected events.
+- Validation status.
+The nine suites selected for the main analysis are marked as selected.
+Other complete suites are labelled as excluded from the selected sample.
+Suites without a valid summary.json are marked as incomplete.
+
+The GUI does not start automated benchmark series from this page.
+The separate scripts/run_experiments.py script is used for that purpose.
+
+Compaction affects the entire MVCC history of the target etcd instance.
+Only use automated experiments against a dedicated test instance.
+Analytics
+Reads existing data from reports/analysis/.
+
+The page displays:
+- Group statistics table.
+- Metric filter.
+- PNG chart previews.
+- Buttons for opening charts in the system image viewer.
+- Metric definitions from reports/analysis/README.md.
+The Recalculate action starts:
+python scripts/analyze_results.py
+
+
+The analysis script aggregates existing experiment summaries.
+It does not start new experiments.
+
+If matplotlib is unavailable, CSV and JSON results can still be generated,
+but PNG chart generation is skipped.
+Logs
+Displays processes started by the GUI.
+
+The page provides:
+- Process name and status.
+- Exit code.
+- Runtime duration.
+- Associated log file.
+- Live process output.
+- Timestamps and auto-scroll controls.
+- Stop selected action.
+- Open log directory action.
+GUI subprocess output is saved under logs/gui/, with a separate
+log file for each run.
+
+Only processes registered by the GUI are listed and managed here.
+Process handling
+Long-running commands are started with subprocess.Popen.
+
+A reader thread collects subprocess output and writes it to a log file.
+Output is passed to the Tkinter interface through a thread-safe queue.
+Tkinter widgets are updated only from the main UI thread.
+
+Each GUI-started process is tracked by a ProcessRunner.
+
+When the main window closes, the application attempts to stop
+its GUI-started processes. It does not intentionally stop pre-existing
+etcd or unrelated WatchLab processes.
+Failure handling
+The GUI reports common failures:
+- Missing Tkinter: a message explains the missing system component.
+- Missing or stale Go binary: the Dashboard reports its status;
+  the demo checks and builds the binary when necessary.
+- Missing Go, etcd or etcdctl: the demo exits with an explanatory error.
+- Unreachable default etcd endpoint: the Dashboard displays the
+  etcdctl error or timeout.
+- Demo failure: the exit code and recent output are available in
+  the Recovery page and Logs page.
+- Missing or corrupted recovery state: the Inspector displays
+  the problem and file path.
+- Corrupted experiment summaries or records: invalid data is handled
+  by the corresponding data-loading and validation code.
+- Missing charts: Analytics displays an empty state instead of a chart.
+Architecture
+scripts/gui.py              GUI entry point
 scripts/gui/
-  __init__.py           package doc
-  theme.py              dark graphite/violet palette, fonts, ttk styles
-  process.py            ProcessRunner: managed Popen + reader thread + queue
-  services.py           Tkinter-free service layer (files, subprocess checks)
-  app.py                main window: sidebar, status bar, page dispatch
-  dashboard.py          Dashboard page
-  recovery.py           Recovery page (demo control + stage model)
-  state_inspector.py    Recovery State Inspector (state.json viewer dialog)
-  events.py             Events page (paginated JSONL tables)
-  experiments.py        Experiments page (series table)
-  analytics.py          Analytics page (stats, charts, definitions)
-  logs.py               Logs page
-scripts/test_gui_services.py   unittest for the service layer
-docs/GUI_GUIDE.md       this file
-```
+  __init__.py               Package marker
+  theme.py                  Colors, fonts and ttk styles
+  process.py                Managed subprocess execution and output queue
+  services.py               File access, environment checks and data parsing
+  app.py                    Main window and page navigation
+  dashboard.py              Dashboard page
+  recovery.py               Demo controls and recovery stage display
+  state_inspector.py        Read-only recovery state dialog
+  events.py                 Paginated JSONL event browser
+  experiments.py            Experiment series table
+  analytics.py              Statistics and chart viewer
+  logs.py                   GUI process log viewer
 
-## Tests
+scripts/demo.py              Isolated end-to-end demonstration
+scripts/run_experiments.py   Automated experiment runner
+scripts/validation.py        Canonical event-level validator
+scripts/analyze_results.py   Results analysis and graph generation
 
-```bash
-python -m py_compile scripts/gui.py scripts/gui/*.py
-.venv/bin/python -m unittest scripts.test_gui_services -v
-```
+scripts/test_demo.py
+scripts/test_gui_services.py
+scripts/test_validation.py
+recover_test.go
 
-The tests cover summary.json reading/validation, suite completeness, JSONL
-loading with normalization and filtering, corrupted-file handling, demo
-summary discovery, analytics loaders, binary staleness, the recovery
-state.json parsing (snapshot_revision vs last_revision vs mod_revision,
-missing/corrupted/unexpected/empty files, key filtering) and the managed
-ProcessRunner (start/stream/stop/exit codes). The GUI itself was smoke-tested
-headlessly under Xvfb (all pages visited, demo control wired, process
-start/stop/close verified; the Recovery State Inspector verified against a
-real demo state file — metrics, filtering, value dialog and the
-missing-file banner).
 
-## Limitations
+Tests
+Run from the project root.
 
-- No new experiments can be started from the GUI (by design).
-- The Events page filters match the saved JSONL record shapes of the
-  automated suites; other file layouts would need small parser additions.
-- Chart images are opened in an external viewer (xdg-open); no embedded
-  plotting, to avoid extra dependencies.
-- The etcd health check on the Dashboard is on demand, not polled
-  continuously.
+Check Python syntax:
+python -m compileall -q scripts
+
+
+Run all Python unit tests:
+python -m unittest discover -s scripts -p "test_*.py" -v
+
+
+Run GUI service tests only:
+python -m unittest scripts.test_gui_services -v
+
+
+Run Go tests:
+go test -count=1 ./...
+
+
+Run static Go analysis:
+go vet ./...
+
+
+The Python tests cover demo helpers, event validation, suite summaries,
+JSONL handling, analytics loaders, binary staleness, Recovery State
+Inspector parsing and filtering, and managed subprocess behavior.
+
+The GUI has also been functionally exercised under Xvfb in Linux.
+This does not replace a manual visual check on a real desktop.
+

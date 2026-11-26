@@ -1,0 +1,19 @@
+RECOVER_STATE_LOADED revision=99 keys=0 state=/home/Komi/projects/watchlab/watchlab-pilot/results/automated/auto-20261119-230848/compaction-state.json
+RECOVER_START run_id=auto-20261119-230848-comp-b prefix=/watchlab/automated/auto-20261119-230848/compaction/events/ state=/home/Komi/projects/watchlab/watchlab-pilot/results/automated/auto-20261119-230848/compaction-state.json output=/home/Komi/projects/watchlab/watchlab-pilot/results/automated/auto-20261119-230848/compaction-recover-after.jsonl
+RECOVER_WATCH_START start_revision=100
+RECOVER_WATCH_CREATED start_revision=100
+RECOVER_COMPACTED compact_revision=109 last_revision=99; taking a new snapshot
+RECOVER_SNAPSHOT revision=109 keys=10 state=/home/Komi/projects/watchlab/watchlab-pilot/results/automated/auto-20261119-230848/compaction-state.json
+RECOVER_WATCH_START start_revision=110
+RECOVER_WATCH_CREATED start_revision=110
+RECOVER_EVENT type=PUT revision=110 key=/watchlab/automated/auto-20261119-230848/compaction/events/phase2/000001
+RECOVER_EVENT type=PUT revision=111 key=/watchlab/automated/auto-20261119-230848/compaction/events/phase2/000002
+RECOVER_EVENT type=PUT revision=112 key=/watchlab/automated/auto-20261119-230848/compaction/events/phase2/000003
+RECOVER_EVENT type=PUT revision=113 key=/watchlab/automated/auto-20261119-230848/compaction/events/phase2/000004
+RECOVER_EVENT type=PUT revision=114 key=/watchlab/automated/auto-20261119-230848/compaction/events/phase2/000005
+RECOVER_EVENT type=PUT revision=115 key=/watchlab/automated/auto-20261119-230848/compaction/events/phase2/000006
+RECOVER_EVENT type=PUT revision=116 key=/watchlab/automated/auto-20261119-230848/compaction/events/phase2/000007
+RECOVER_EVENT type=PUT revision=117 key=/watchlab/automated/auto-20261119-230848/compaction/events/phase2/000008
+RECOVER_EVENT type=PUT revision=118 key=/watchlab/automated/auto-20261119-230848/compaction/events/phase2/000009
+RECOVER_EVENT type=PUT revision=119 key=/watchlab/automated/auto-20261119-230848/compaction/events/phase2/000010
+RECOVER_STOPPED reason=context canceled last_revision=119

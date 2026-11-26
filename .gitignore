@@ -1,0 +1,43 @@
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local runtime files
+/logs/
+/bin/
+/WatchLab-Release.zip
+
+# Kilo and AI-agent working materials
+/.kilo/
+/AGENTS.md
+/README-KILO-SETUP.md
+
+# Eureka documents and internal reviews
+/docs/final/
+/docs/reviews/
+/docs/source/
+
+# Local secrets and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa
+id_ed25519
+
+# OS/editor artifacts
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Existing project-specific exclusion
+/results/*.jsonl

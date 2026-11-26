@@ -1,0 +1,5 @@
+RECOVER_SNAPSHOT revision=142 keys=0 state=/home/Komi/projects/watchlab/watchlab-pilot/results/automated/auto-20261119-230853/compaction-state.json
+RECOVER_START run_id=auto-20261119-230853-comp-a prefix=/watchlab/automated/auto-20261119-230853/compaction/events/ state=/home/Komi/projects/watchlab/watchlab-pilot/results/automated/auto-20261119-230853/compaction-state.json output=/home/Komi/projects/watchlab/watchlab-pilot/results/automated/auto-20261119-230853/compaction-initial-recover.jsonl
+RECOVER_WATCH_START start_revision=143
+RECOVER_WATCH_CREATED start_revision=143
+RECOVER_STOPPED reason=context canceled last_revision=142

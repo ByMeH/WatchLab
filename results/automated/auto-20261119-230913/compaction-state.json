@@ -1,0 +1,611 @@
+{
+  "schema_version": 1,
+  "prefix": "/watchlab/automated/auto-20261119-230913/compaction/events/",
+  "snapshot_revision": 444,
+  "last_revision": 494,
+  "updated_at": "2026-11-19T18:09:35.026854722Z",
+  "snapshot_duration_ms": 1.867983,
+  "data_bytes": 13130,
+  "keys": {
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000001": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":1,\"request_id\":\"auto-20261119-230913-comp-p1-000001\",\"created_at\":\"2026-11-19T18:09:24.336823699Z\",\"message\":\"watchlab test event 000001\"}",
+      "create_revision": 395,
+      "mod_revision": 395,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000002": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":2,\"request_id\":\"auto-20261119-230913-comp-p1-000002\",\"created_at\":\"2026-11-19T18:09:24.44616539Z\",\"message\":\"watchlab test event 000002\"}",
+      "create_revision": 396,
+      "mod_revision": 396,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000003": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":3,\"request_id\":\"auto-20261119-230913-comp-p1-000003\",\"created_at\":\"2026-11-19T18:09:24.551275817Z\",\"message\":\"watchlab test event 000003\"}",
+      "create_revision": 397,
+      "mod_revision": 397,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000004": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":4,\"request_id\":\"auto-20261119-230913-comp-p1-000004\",\"created_at\":\"2026-11-19T18:09:24.656489792Z\",\"message\":\"watchlab test event 000004\"}",
+      "create_revision": 398,
+      "mod_revision": 398,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000005": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":5,\"request_id\":\"auto-20261119-230913-comp-p1-000005\",\"created_at\":\"2026-11-19T18:09:24.762056843Z\",\"message\":\"watchlab test event 000005\"}",
+      "create_revision": 399,
+      "mod_revision": 399,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000006": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":6,\"request_id\":\"auto-20261119-230913-comp-p1-000006\",\"created_at\":\"2026-11-19T18:09:24.86730248Z\",\"message\":\"watchlab test event 000006\"}",
+      "create_revision": 400,
+      "mod_revision": 400,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000007": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":7,\"request_id\":\"auto-20261119-230913-comp-p1-000007\",\"created_at\":\"2026-11-19T18:09:24.972612165Z\",\"message\":\"watchlab test event 000007\"}",
+      "create_revision": 401,
+      "mod_revision": 401,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000008": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":8,\"request_id\":\"auto-20261119-230913-comp-p1-000008\",\"created_at\":\"2026-11-19T18:09:25.081666582Z\",\"message\":\"watchlab test event 000008\"}",
+      "create_revision": 402,
+      "mod_revision": 402,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000009": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":9,\"request_id\":\"auto-20261119-230913-comp-p1-000009\",\"created_at\":\"2026-11-19T18:09:25.187027517Z\",\"message\":\"watchlab test event 000009\"}",
+      "create_revision": 403,
+      "mod_revision": 403,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000010": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":10,\"request_id\":\"auto-20261119-230913-comp-p1-000010\",\"created_at\":\"2026-11-19T18:09:25.29272296Z\",\"message\":\"watchlab test event 000010\"}",
+      "create_revision": 404,
+      "mod_revision": 404,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000011": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":11,\"request_id\":\"auto-20261119-230913-comp-p1-000011\",\"created_at\":\"2026-11-19T18:09:25.400606719Z\",\"message\":\"watchlab test event 000011\"}",
+      "create_revision": 405,
+      "mod_revision": 405,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000012": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":12,\"request_id\":\"auto-20261119-230913-comp-p1-000012\",\"created_at\":\"2026-11-19T18:09:25.505951373Z\",\"message\":\"watchlab test event 000012\"}",
+      "create_revision": 406,
+      "mod_revision": 406,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000013": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":13,\"request_id\":\"auto-20261119-230913-comp-p1-000013\",\"created_at\":\"2026-11-19T18:09:25.610977231Z\",\"message\":\"watchlab test event 000013\"}",
+      "create_revision": 407,
+      "mod_revision": 407,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000014": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":14,\"request_id\":\"auto-20261119-230913-comp-p1-000014\",\"created_at\":\"2026-11-19T18:09:25.716273102Z\",\"message\":\"watchlab test event 000014\"}",
+      "create_revision": 408,
+      "mod_revision": 408,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000015": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":15,\"request_id\":\"auto-20261119-230913-comp-p1-000015\",\"created_at\":\"2026-11-19T18:09:25.82144509Z\",\"message\":\"watchlab test event 000015\"}",
+      "create_revision": 409,
+      "mod_revision": 409,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000016": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":16,\"request_id\":\"auto-20261119-230913-comp-p1-000016\",\"created_at\":\"2026-11-19T18:09:25.927158007Z\",\"message\":\"watchlab test event 000016\"}",
+      "create_revision": 410,
+      "mod_revision": 410,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000017": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":17,\"request_id\":\"auto-20261119-230913-comp-p1-000017\",\"created_at\":\"2026-11-19T18:09:26.032333069Z\",\"message\":\"watchlab test event 000017\"}",
+      "create_revision": 411,
+      "mod_revision": 411,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000018": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":18,\"request_id\":\"auto-20261119-230913-comp-p1-000018\",\"created_at\":\"2026-11-19T18:09:26.137562819Z\",\"message\":\"watchlab test event 000018\"}",
+      "create_revision": 412,
+      "mod_revision": 412,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000019": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":19,\"request_id\":\"auto-20261119-230913-comp-p1-000019\",\"created_at\":\"2026-11-19T18:09:26.242617537Z\",\"message\":\"watchlab test event 000019\"}",
+      "create_revision": 413,
+      "mod_revision": 413,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000020": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":20,\"request_id\":\"auto-20261119-230913-comp-p1-000020\",\"created_at\":\"2026-11-19T18:09:26.35388564Z\",\"message\":\"watchlab test event 000020\"}",
+      "create_revision": 414,
+      "mod_revision": 414,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000021": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":21,\"request_id\":\"auto-20261119-230913-comp-p1-000021\",\"created_at\":\"2026-11-19T18:09:26.459342907Z\",\"message\":\"watchlab test event 000021\"}",
+      "create_revision": 415,
+      "mod_revision": 415,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000022": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":22,\"request_id\":\"auto-20261119-230913-comp-p1-000022\",\"created_at\":\"2026-11-19T18:09:26.565585968Z\",\"message\":\"watchlab test event 000022\"}",
+      "create_revision": 416,
+      "mod_revision": 416,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000023": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":23,\"request_id\":\"auto-20261119-230913-comp-p1-000023\",\"created_at\":\"2026-11-19T18:09:26.670633847Z\",\"message\":\"watchlab test event 000023\"}",
+      "create_revision": 417,
+      "mod_revision": 417,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000024": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":24,\"request_id\":\"auto-20261119-230913-comp-p1-000024\",\"created_at\":\"2026-11-19T18:09:26.778727343Z\",\"message\":\"watchlab test event 000024\"}",
+      "create_revision": 418,
+      "mod_revision": 418,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000025": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":25,\"request_id\":\"auto-20261119-230913-comp-p1-000025\",\"created_at\":\"2026-11-19T18:09:26.886448201Z\",\"message\":\"watchlab test event 000025\"}",
+      "create_revision": 419,
+      "mod_revision": 419,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000026": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":26,\"request_id\":\"auto-20261119-230913-comp-p1-000026\",\"created_at\":\"2026-11-19T18:09:27.000775984Z\",\"message\":\"watchlab test event 000026\"}",
+      "create_revision": 420,
+      "mod_revision": 420,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000027": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":27,\"request_id\":\"auto-20261119-230913-comp-p1-000027\",\"created_at\":\"2026-11-19T18:09:27.108343446Z\",\"message\":\"watchlab test event 000027\"}",
+      "create_revision": 421,
+      "mod_revision": 421,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000028": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":28,\"request_id\":\"auto-20261119-230913-comp-p1-000028\",\"created_at\":\"2026-11-19T18:09:27.216347805Z\",\"message\":\"watchlab test event 000028\"}",
+      "create_revision": 422,
+      "mod_revision": 422,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000029": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":29,\"request_id\":\"auto-20261119-230913-comp-p1-000029\",\"created_at\":\"2026-11-19T18:09:27.32546275Z\",\"message\":\"watchlab test event 000029\"}",
+      "create_revision": 423,
+      "mod_revision": 423,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000030": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":30,\"request_id\":\"auto-20261119-230913-comp-p1-000030\",\"created_at\":\"2026-11-19T18:09:27.433812449Z\",\"message\":\"watchlab test event 000030\"}",
+      "create_revision": 424,
+      "mod_revision": 424,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000031": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":31,\"request_id\":\"auto-20261119-230913-comp-p1-000031\",\"created_at\":\"2026-11-19T18:09:27.54197136Z\",\"message\":\"watchlab test event 000031\"}",
+      "create_revision": 425,
+      "mod_revision": 425,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000032": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":32,\"request_id\":\"auto-20261119-230913-comp-p1-000032\",\"created_at\":\"2026-11-19T18:09:27.655778022Z\",\"message\":\"watchlab test event 000032\"}",
+      "create_revision": 426,
+      "mod_revision": 426,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000033": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":33,\"request_id\":\"auto-20261119-230913-comp-p1-000033\",\"created_at\":\"2026-11-19T18:09:27.760525753Z\",\"message\":\"watchlab test event 000033\"}",
+      "create_revision": 427,
+      "mod_revision": 427,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000034": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":34,\"request_id\":\"auto-20261119-230913-comp-p1-000034\",\"created_at\":\"2026-11-19T18:09:27.865810007Z\",\"message\":\"watchlab test event 000034\"}",
+      "create_revision": 428,
+      "mod_revision": 428,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000035": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":35,\"request_id\":\"auto-20261119-230913-comp-p1-000035\",\"created_at\":\"2026-11-19T18:09:27.974861551Z\",\"message\":\"watchlab test event 000035\"}",
+      "create_revision": 429,
+      "mod_revision": 429,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000036": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":36,\"request_id\":\"auto-20261119-230913-comp-p1-000036\",\"created_at\":\"2026-11-19T18:09:28.085502413Z\",\"message\":\"watchlab test event 000036\"}",
+      "create_revision": 430,
+      "mod_revision": 430,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000037": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":37,\"request_id\":\"auto-20261119-230913-comp-p1-000037\",\"created_at\":\"2026-11-19T18:09:28.200081648Z\",\"message\":\"watchlab test event 000037\"}",
+      "create_revision": 431,
+      "mod_revision": 431,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000038": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":38,\"request_id\":\"auto-20261119-230913-comp-p1-000038\",\"created_at\":\"2026-11-19T18:09:28.309013902Z\",\"message\":\"watchlab test event 000038\"}",
+      "create_revision": 432,
+      "mod_revision": 432,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000039": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":39,\"request_id\":\"auto-20261119-230913-comp-p1-000039\",\"created_at\":\"2026-11-19T18:09:28.416248997Z\",\"message\":\"watchlab test event 000039\"}",
+      "create_revision": 433,
+      "mod_revision": 433,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000040": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":40,\"request_id\":\"auto-20261119-230913-comp-p1-000040\",\"created_at\":\"2026-11-19T18:09:28.524276877Z\",\"message\":\"watchlab test event 000040\"}",
+      "create_revision": 434,
+      "mod_revision": 434,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000041": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":41,\"request_id\":\"auto-20261119-230913-comp-p1-000041\",\"created_at\":\"2026-11-19T18:09:28.632518405Z\",\"message\":\"watchlab test event 000041\"}",
+      "create_revision": 435,
+      "mod_revision": 435,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000042": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":42,\"request_id\":\"auto-20261119-230913-comp-p1-000042\",\"created_at\":\"2026-11-19T18:09:28.742598891Z\",\"message\":\"watchlab test event 000042\"}",
+      "create_revision": 436,
+      "mod_revision": 436,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000043": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":43,\"request_id\":\"auto-20261119-230913-comp-p1-000043\",\"created_at\":\"2026-11-19T18:09:28.853158158Z\",\"message\":\"watchlab test event 000043\"}",
+      "create_revision": 437,
+      "mod_revision": 437,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000044": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":44,\"request_id\":\"auto-20261119-230913-comp-p1-000044\",\"created_at\":\"2026-11-19T18:09:28.95879759Z\",\"message\":\"watchlab test event 000044\"}",
+      "create_revision": 438,
+      "mod_revision": 438,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000045": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":45,\"request_id\":\"auto-20261119-230913-comp-p1-000045\",\"created_at\":\"2026-11-19T18:09:29.069336293Z\",\"message\":\"watchlab test event 000045\"}",
+      "create_revision": 439,
+      "mod_revision": 439,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000046": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":46,\"request_id\":\"auto-20261119-230913-comp-p1-000046\",\"created_at\":\"2026-11-19T18:09:29.18016434Z\",\"message\":\"watchlab test event 000046\"}",
+      "create_revision": 440,
+      "mod_revision": 440,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000047": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":47,\"request_id\":\"auto-20261119-230913-comp-p1-000047\",\"created_at\":\"2026-11-19T18:09:29.289015486Z\",\"message\":\"watchlab test event 000047\"}",
+      "create_revision": 441,
+      "mod_revision": 441,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000048": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":48,\"request_id\":\"auto-20261119-230913-comp-p1-000048\",\"created_at\":\"2026-11-19T18:09:29.400232983Z\",\"message\":\"watchlab test event 000048\"}",
+      "create_revision": 442,
+      "mod_revision": 442,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000049": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":49,\"request_id\":\"auto-20261119-230913-comp-p1-000049\",\"created_at\":\"2026-11-19T18:09:29.5083366Z\",\"message\":\"watchlab test event 000049\"}",
+      "create_revision": 443,
+      "mod_revision": 443,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase1/000050": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p1\",\"sequence\":50,\"request_id\":\"auto-20261119-230913-comp-p1-000050\",\"created_at\":\"2026-11-19T18:09:29.616330863Z\",\"message\":\"watchlab test event 000050\"}",
+      "create_revision": 444,
+      "mod_revision": 444,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000001": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":1,\"request_id\":\"auto-20261119-230913-comp-p2-000001\",\"created_at\":\"2026-11-19T18:09:29.795627784Z\",\"message\":\"watchlab test event 000001\"}",
+      "create_revision": 445,
+      "mod_revision": 445,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000002": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":2,\"request_id\":\"auto-20261119-230913-comp-p2-000002\",\"created_at\":\"2026-11-19T18:09:29.912060257Z\",\"message\":\"watchlab test event 000002\"}",
+      "create_revision": 446,
+      "mod_revision": 446,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000003": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":3,\"request_id\":\"auto-20261119-230913-comp-p2-000003\",\"created_at\":\"2026-11-19T18:09:30.017303995Z\",\"message\":\"watchlab test event 000003\"}",
+      "create_revision": 447,
+      "mod_revision": 447,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000004": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":4,\"request_id\":\"auto-20261119-230913-comp-p2-000004\",\"created_at\":\"2026-11-19T18:09:30.124389758Z\",\"message\":\"watchlab test event 000004\"}",
+      "create_revision": 448,
+      "mod_revision": 448,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000005": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":5,\"request_id\":\"auto-20261119-230913-comp-p2-000005\",\"created_at\":\"2026-11-19T18:09:30.23672941Z\",\"message\":\"watchlab test event 000005\"}",
+      "create_revision": 449,
+      "mod_revision": 449,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000006": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":6,\"request_id\":\"auto-20261119-230913-comp-p2-000006\",\"created_at\":\"2026-11-19T18:09:30.343384378Z\",\"message\":\"watchlab test event 000006\"}",
+      "create_revision": 450,
+      "mod_revision": 450,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000007": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":7,\"request_id\":\"auto-20261119-230913-comp-p2-000007\",\"created_at\":\"2026-11-19T18:09:30.449897158Z\",\"message\":\"watchlab test event 000007\"}",
+      "create_revision": 451,
+      "mod_revision": 451,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000008": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":8,\"request_id\":\"auto-20261119-230913-comp-p2-000008\",\"created_at\":\"2026-11-19T18:09:30.556557454Z\",\"message\":\"watchlab test event 000008\"}",
+      "create_revision": 452,
+      "mod_revision": 452,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000009": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":9,\"request_id\":\"auto-20261119-230913-comp-p2-000009\",\"created_at\":\"2026-11-19T18:09:30.663089996Z\",\"message\":\"watchlab test event 000009\"}",
+      "create_revision": 453,
+      "mod_revision": 453,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000010": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":10,\"request_id\":\"auto-20261119-230913-comp-p2-000010\",\"created_at\":\"2026-11-19T18:09:30.769431588Z\",\"message\":\"watchlab test event 000010\"}",
+      "create_revision": 454,
+      "mod_revision": 454,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000011": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":11,\"request_id\":\"auto-20261119-230913-comp-p2-000011\",\"created_at\":\"2026-11-19T18:09:30.875600878Z\",\"message\":\"watchlab test event 000011\"}",
+      "create_revision": 455,
+      "mod_revision": 455,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000012": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":12,\"request_id\":\"auto-20261119-230913-comp-p2-000012\",\"created_at\":\"2026-11-19T18:09:30.981746172Z\",\"message\":\"watchlab test event 000012\"}",
+      "create_revision": 456,
+      "mod_revision": 456,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000013": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":13,\"request_id\":\"auto-20261119-230913-comp-p2-000013\",\"created_at\":\"2026-11-19T18:09:31.087754779Z\",\"message\":\"watchlab test event 000013\"}",
+      "create_revision": 457,
+      "mod_revision": 457,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000014": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":14,\"request_id\":\"auto-20261119-230913-comp-p2-000014\",\"created_at\":\"2026-11-19T18:09:31.192749214Z\",\"message\":\"watchlab test event 000014\"}",
+      "create_revision": 458,
+      "mod_revision": 458,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000015": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":15,\"request_id\":\"auto-20261119-230913-comp-p2-000015\",\"created_at\":\"2026-11-19T18:09:31.297446616Z\",\"message\":\"watchlab test event 000015\"}",
+      "create_revision": 459,
+      "mod_revision": 459,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000016": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":16,\"request_id\":\"auto-20261119-230913-comp-p2-000016\",\"created_at\":\"2026-11-19T18:09:31.405366829Z\",\"message\":\"watchlab test event 000016\"}",
+      "create_revision": 460,
+      "mod_revision": 460,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000017": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":17,\"request_id\":\"auto-20261119-230913-comp-p2-000017\",\"created_at\":\"2026-11-19T18:09:31.510640997Z\",\"message\":\"watchlab test event 000017\"}",
+      "create_revision": 461,
+      "mod_revision": 461,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000018": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":18,\"request_id\":\"auto-20261119-230913-comp-p2-000018\",\"created_at\":\"2026-11-19T18:09:31.61672152Z\",\"message\":\"watchlab test event 000018\"}",
+      "create_revision": 462,
+      "mod_revision": 462,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000019": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":19,\"request_id\":\"auto-20261119-230913-comp-p2-000019\",\"created_at\":\"2026-11-19T18:09:31.721744051Z\",\"message\":\"watchlab test event 000019\"}",
+      "create_revision": 463,
+      "mod_revision": 463,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000020": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":20,\"request_id\":\"auto-20261119-230913-comp-p2-000020\",\"created_at\":\"2026-11-19T18:09:31.826770916Z\",\"message\":\"watchlab test event 000020\"}",
+      "create_revision": 464,
+      "mod_revision": 464,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000021": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":21,\"request_id\":\"auto-20261119-230913-comp-p2-000021\",\"created_at\":\"2026-11-19T18:09:31.931914009Z\",\"message\":\"watchlab test event 000021\"}",
+      "create_revision": 465,
+      "mod_revision": 465,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000022": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":22,\"request_id\":\"auto-20261119-230913-comp-p2-000022\",\"created_at\":\"2026-11-19T18:09:32.03686768Z\",\"message\":\"watchlab test event 000022\"}",
+      "create_revision": 466,
+      "mod_revision": 466,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000023": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":23,\"request_id\":\"auto-20261119-230913-comp-p2-000023\",\"created_at\":\"2026-11-19T18:09:32.142876111Z\",\"message\":\"watchlab test event 000023\"}",
+      "create_revision": 467,
+      "mod_revision": 467,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000024": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":24,\"request_id\":\"auto-20261119-230913-comp-p2-000024\",\"created_at\":\"2026-11-19T18:09:32.247916916Z\",\"message\":\"watchlab test event 000024\"}",
+      "create_revision": 468,
+      "mod_revision": 468,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000025": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":25,\"request_id\":\"auto-20261119-230913-comp-p2-000025\",\"created_at\":\"2026-11-19T18:09:32.352913359Z\",\"message\":\"watchlab test event 000025\"}",
+      "create_revision": 469,
+      "mod_revision": 469,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000026": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":26,\"request_id\":\"auto-20261119-230913-comp-p2-000026\",\"created_at\":\"2026-11-19T18:09:32.458292259Z\",\"message\":\"watchlab test event 000026\"}",
+      "create_revision": 470,
+      "mod_revision": 470,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000027": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":27,\"request_id\":\"auto-20261119-230913-comp-p2-000027\",\"created_at\":\"2026-11-19T18:09:32.56352308Z\",\"message\":\"watchlab test event 000027\"}",
+      "create_revision": 471,
+      "mod_revision": 471,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000028": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":28,\"request_id\":\"auto-20261119-230913-comp-p2-000028\",\"created_at\":\"2026-11-19T18:09:32.67228527Z\",\"message\":\"watchlab test event 000028\"}",
+      "create_revision": 472,
+      "mod_revision": 472,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000029": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":29,\"request_id\":\"auto-20261119-230913-comp-p2-000029\",\"created_at\":\"2026-11-19T18:09:32.777403125Z\",\"message\":\"watchlab test event 000029\"}",
+      "create_revision": 473,
+      "mod_revision": 473,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000030": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":30,\"request_id\":\"auto-20261119-230913-comp-p2-000030\",\"created_at\":\"2026-11-19T18:09:32.882611408Z\",\"message\":\"watchlab test event 000030\"}",
+      "create_revision": 474,
+      "mod_revision": 474,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000031": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":31,\"request_id\":\"auto-20261119-230913-comp-p2-000031\",\"created_at\":\"2026-11-19T18:09:32.987790098Z\",\"message\":\"watchlab test event 000031\"}",
+      "create_revision": 475,
+      "mod_revision": 475,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000032": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":32,\"request_id\":\"auto-20261119-230913-comp-p2-000032\",\"created_at\":\"2026-11-19T18:09:33.093421336Z\",\"message\":\"watchlab test event 000032\"}",
+      "create_revision": 476,
+      "mod_revision": 476,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000033": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":33,\"request_id\":\"auto-20261119-230913-comp-p2-000033\",\"created_at\":\"2026-11-19T18:09:33.198159893Z\",\"message\":\"watchlab test event 000033\"}",
+      "create_revision": 477,
+      "mod_revision": 477,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000034": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":34,\"request_id\":\"auto-20261119-230913-comp-p2-000034\",\"created_at\":\"2026-11-19T18:09:33.301671093Z\",\"message\":\"watchlab test event 000034\"}",
+      "create_revision": 478,
+      "mod_revision": 478,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000035": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":35,\"request_id\":\"auto-20261119-230913-comp-p2-000035\",\"created_at\":\"2026-11-19T18:09:33.404685337Z\",\"message\":\"watchlab test event 000035\"}",
+      "create_revision": 479,
+      "mod_revision": 479,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000036": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":36,\"request_id\":\"auto-20261119-230913-comp-p2-000036\",\"created_at\":\"2026-11-19T18:09:33.513372974Z\",\"message\":\"watchlab test event 000036\"}",
+      "create_revision": 480,
+      "mod_revision": 480,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000037": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":37,\"request_id\":\"auto-20261119-230913-comp-p2-000037\",\"created_at\":\"2026-11-19T18:09:33.618125491Z\",\"message\":\"watchlab test event 000037\"}",
+      "create_revision": 481,
+      "mod_revision": 481,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000038": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":38,\"request_id\":\"auto-20261119-230913-comp-p2-000038\",\"created_at\":\"2026-11-19T18:09:33.723182703Z\",\"message\":\"watchlab test event 000038\"}",
+      "create_revision": 482,
+      "mod_revision": 482,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000039": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":39,\"request_id\":\"auto-20261119-230913-comp-p2-000039\",\"created_at\":\"2026-11-19T18:09:33.831428732Z\",\"message\":\"watchlab test event 000039\"}",
+      "create_revision": 483,
+      "mod_revision": 483,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000040": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":40,\"request_id\":\"auto-20261119-230913-comp-p2-000040\",\"created_at\":\"2026-11-19T18:09:33.936420697Z\",\"message\":\"watchlab test event 000040\"}",
+      "create_revision": 484,
+      "mod_revision": 484,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000041": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":41,\"request_id\":\"auto-20261119-230913-comp-p2-000041\",\"created_at\":\"2026-11-19T18:09:34.047555328Z\",\"message\":\"watchlab test event 000041\"}",
+      "create_revision": 485,
+      "mod_revision": 485,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000042": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":42,\"request_id\":\"auto-20261119-230913-comp-p2-000042\",\"created_at\":\"2026-11-19T18:09:34.157860725Z\",\"message\":\"watchlab test event 000042\"}",
+      "create_revision": 486,
+      "mod_revision": 486,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000043": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":43,\"request_id\":\"auto-20261119-230913-comp-p2-000043\",\"created_at\":\"2026-11-19T18:09:34.26416606Z\",\"message\":\"watchlab test event 000043\"}",
+      "create_revision": 487,
+      "mod_revision": 487,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000044": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":44,\"request_id\":\"auto-20261119-230913-comp-p2-000044\",\"created_at\":\"2026-11-19T18:09:34.37038398Z\",\"message\":\"watchlab test event 000044\"}",
+      "create_revision": 488,
+      "mod_revision": 488,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000045": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":45,\"request_id\":\"auto-20261119-230913-comp-p2-000045\",\"created_at\":\"2026-11-19T18:09:34.474939546Z\",\"message\":\"watchlab test event 000045\"}",
+      "create_revision": 489,
+      "mod_revision": 489,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000046": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":46,\"request_id\":\"auto-20261119-230913-comp-p2-000046\",\"created_at\":\"2026-11-19T18:09:34.580631338Z\",\"message\":\"watchlab test event 000046\"}",
+      "create_revision": 490,
+      "mod_revision": 490,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000047": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":47,\"request_id\":\"auto-20261119-230913-comp-p2-000047\",\"created_at\":\"2026-11-19T18:09:34.686353231Z\",\"message\":\"watchlab test event 000047\"}",
+      "create_revision": 491,
+      "mod_revision": 491,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000048": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":48,\"request_id\":\"auto-20261119-230913-comp-p2-000048\",\"created_at\":\"2026-11-19T18:09:34.794664178Z\",\"message\":\"watchlab test event 000048\"}",
+      "create_revision": 492,
+      "mod_revision": 492,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000049": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":49,\"request_id\":\"auto-20261119-230913-comp-p2-000049\",\"created_at\":\"2026-11-19T18:09:34.901360437Z\",\"message\":\"watchlab test event 000049\"}",
+      "create_revision": 493,
+      "mod_revision": 493,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000050": {
+      "value": "{\"run_id\":\"auto-20261119-230913-comp-p2\",\"sequence\":50,\"request_id\":\"auto-20261119-230913-comp-p2-000050\",\"created_at\":\"2026-11-19T18:09:35.016516014Z\",\"message\":\"watchlab test event 000050\"}",
+      "create_revision": 494,
+      "mod_revision": 494,
+      "version": 1
+    }
+  }
+}

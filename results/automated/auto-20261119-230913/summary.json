@@ -1,0 +1,47 @@
+{
+  "suite_id": "auto-20261119-230913",
+  "endpoint": "http://127.0.0.1:2379",
+  "events_per_phase": 50,
+  "interval": "100ms",
+  "note": "One automated pilot suite; repeat suites before inferential conclusions.",
+  "results": [
+    {
+      "scenario": "reconnect",
+      "requested_events": 100,
+      "observed_events": 100,
+      "missing_events": 0,
+      "snapshot_keys": "",
+      "snapshot_bytes": "",
+      "snapshot_range_ms": "",
+      "recovery_ms": "",
+      "final_keys": "",
+      "last_revision": ""
+    },
+    {
+      "scenario": "compaction_recovery",
+      "requested_events": 50,
+      "observed_events": 50,
+      "missing_events": 0,
+      "phase1_events_represented_by_snapshot": 50,
+      "snapshot_keys": 50,
+      "snapshot_bytes": 13130,
+      "snapshot_range_ms": 1.867983,
+      "recovery_ms": 19.773,
+      "snapshot_to_watch_ms": 1.397,
+      "final_keys": 100,
+      "last_revision": 494
+    },
+    {
+      "scenario": "same_key_put_put_delete",
+      "requested_events": 3,
+      "observed_events": 3,
+      "missing_events": 0,
+      "snapshot_keys": "",
+      "snapshot_bytes": "",
+      "snapshot_range_ms": "",
+      "recovery_ms": "",
+      "final_keys": 0,
+      "last_revision": 497
+    }
+  ]
+}

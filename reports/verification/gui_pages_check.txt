@@ -1,0 +1,104 @@
+WatchLab Desktop GUI verification — pages, dashboard, no-etcd behaviour (drive script 1)
+Date: 2026-11-21 18:56 local (+05) · host: no real display, Xvfb 1280x900x24
+Verdict: 37 PASS / 1 FAIL / 0 tracebacks / exit code 0
+
+COMMANDS USED (exact)
+  etcdctl --endpoints=127.0.0.1:2379 endpoint health; echo $?
+    -> "127.0.0.1:2379 is unhealthy: failed to commit proposal: context deadline
+       exceeded" ... "Error: unhealthy cluster", exit=1  (no etcd running, as required)
+  python3 -m py_compile /tmp/wl_gui_drive1.py
+  xvfb-run -a -s "-screen 0 1280x900x24" python3 /tmp/wl_gui_drive1.py
+    (executed twice: first run exposed a measurement artifact in check 4, second
+     run below measures a fresh health round-trip; all other checks identical)
+  python3 scripts/analyze_results.py --out /tmp/analysis_out_check   (from the
+    project root, run by the drive script with cwd=project; exit 0)
+
+SCRIPT SOURCE (stays in /tmp, not copied into the project)
+  /tmp/wl_gui_drive1.py — single-threaded GUI drive: WatchLabApp instantiated,
+  pumped with app.update() + time.sleep(0.02) until deadlines; workers report via
+  the app mailbox; app always destroyed in finally; stderr teed to catch
+  mailbox-swallowed exceptions (traceback.print_exc).
+  Raw run log: /tmp/wl_drive1_log.txt, stdout /tmp/wl_drive1.out, stderr (empty): /tmp/wl_drive1.err
+
+CONSTRAINTS RESPECTED
+  - only reports/verification/ and /tmp written by this verification; no source
+    files, results/, reports/analysis/, docs/ touched (see check
+    8.analytics/reports_analysis_untouched: 9 files compared by mtime_ns+size,
+    identical=True before/after the CLI tool ran into /tmp/analysis_out_check);
+  - run_experiments.py NOT run; the Recalculate button was NOT clicked — its
+    wiring was verified by patching app.run_process with a recorder;
+  - no etcd process started; logs/gui not written (no GUI-spawned processes).
+
+FULL LOG (verbatim stdout of the second run)
+[PASS] 1.launch/title | title='WatchLab Desktop' pump_wall=2.23s
+[PASS] 2.page/dashboard | frame.winfo_ismapped()=True
+[PASS] 2.page/recovery | frame.winfo_ismapped()=True
+[PASS] 2.page/events | frame.winfo_ismapped()=True
+[PASS] 2.page/experiments | frame.winfo_ismapped()=True
+[PASS] 2.page/analytics | frame.winfo_ismapped()=True
+[PASS] 2.page/logs | frame.winfo_ismapped()=True
+[PASS] 3.dashboard/completed_card | rendered='17' services.completed_series()=17 (brief expected '10 completed suites' — actual completed_series count is 17: 17 suites have a valid complete summary.json, 9 are in the selected DEFAULT_SUITES, 1 incomplete excluded)
+[PASS] 3.dashboard/selected_card | rendered='9' services.selected_series()=9
+[PASS] 3.dashboard/verified_card | rendered='1,467' services.verified_events()=1467 (960+480+27 from reports/analysis/event_validation.json)
+[PASS] 4.no-etcd/card_shows_unavailable | wall=3.08s iterations=147 text=' unavailable' detail='{"level":"warn","ts":"2026-11-21T18:56:18.753088+0500","logger":"client","caller":"v3/retry_interceptor.go:68","msg":"re' applied=[(False, '{"level":"warn","ts":"2026-11-21T18:56:25.387985+0500","logger":"client","caller":"v3/retry_interceptor.go:68","msg":"re')]
+[PASS] 4.no-etcd/ui_responsive_during_wait | fresh health wait: 3.08s / 147 pump cycles; then 96 update cycles processed over a 2.00s fixed window (no freeze)
+[PASS] 4.no-etcd/statusbar_right_mentions_etcd | status_right='etcd http://127.0.0.1:2379: unavailable'
+[PASS] 5.analytics/stats_rows>0 | stats_tree rows=57
+[PASS] 5.analytics/metric_combobox_values | metric combobox values=12 first=['all', 'observed_events', 'missing_events']
+[PASS] 5.analytics/3_charts_listed | charts=['recovery_interval.png', 'snapshot_payload_size.png', 'snapshot_range.png']
+[PASS] 5.analytics/empty_state_no_charts_label | label='No charts found in reports/analysis/. Run “Recalculate” to generate them.'
+[PASS] 5.analytics/monkeypatch_restored | charts rows after restore=3
+[PASS] 6.events/all_rows | tree rows=100 status='auto-20261119-233628 · Producer acknowledgements · matched 400 · showing 1–100 · files: reconnect-producer-p1.jsonl, reconnect-producer-p2.jsonl, compaction-producer-p1.jsonl, compaction-producer-p2.jsonl, compaction-producer-p3.jsonl'
+[PASS] 6.events/all_matched_crosscheck | GUI total=400 independent load_events_page total=400
+[PASS] 6.events/key_filter_changed_and_crosscheck | GUI total=4 independent=4 rows=4 status='auto-20261119-233628 · Producer acknowledgements · matched 4 · showing 1–4 · files: reconnect-producer-p1.jsonl, reconnect-producer-p2.jsonl, compaction-producer-p1.jsonl, compaction-producer-p2.jsonl, compaction-producer-p3.jsonl'
+[PASS] 6.events/page0_restored | status='auto-20261119-233628 · Producer acknowledgements · matched 400 · showing 1–100 · files: reconnect-producer-p1.jsonl, reconnect-producer-p2.jsonl, compaction-producer-p1.jsonl, compaction-producer-p2.jsonl, compaction-producer-p3.jsonl'
+[PASS] 6.events/next_page_rows_and_showing | page=1 rows=100 status='auto-20261119-233628 · Producer acknowledgements · matched 400 · showing 101–200 · files: reconnect-producer-p1.jsonl, reconnect-producer-p2.jsonl, compaction-producer-p1.jsonl, compaction-producer-p2.jsonl, compaction-producer-p3.jsonl'
+[PASS] 6.events/page1_first_revision_crosscheck | GUI first revision='2342' independent='2342'
+[PASS] 6.events/filters_restored | page=0 key_var=''
+[PASS] 7.experiments/rows>0 | tree rows=52
+[PASS] 7.experiments/230935_excluded_incomplete | rows for auto-20261119-230935 with status 'excluded (incomplete)': 1
+[PASS] 7.experiments/ok_rows_exist | ok rows=27, not-in-selected-nine rows=24
+[PASS] 7.experiments/summary_selected_9 | summary_label='completed series: 17 · selected: 9 · verified events: 1467 · rows: 52'
+[PASS] 8.analytics/stats_rows>0 | stats_tree rows=57
+[FAIL] 8.analytics/definitions_nonempty_and_matches_readme | definitions widget content length=0 (expected: non-empty and matching the start of reports/analysis/README.md, length 4854, which starts with '# reports/analysis — описание файлов\n\nМашиночитаемые агрегат')
+[PASS] 8.analytics/3_charts_listed | charts=['recovery_interval.png', 'snapshot_payload_size.png', 'snapshot_range.png']
+[PASS] 8.analytics/recalculate_wiring | recorded call=[('analyze-results', ['/usr/bin/python3', 'scripts/analyze_results.py'])] expected name='analyze-results' cmd=['/usr/bin/python3', 'scripts/analyze_results.py']
+[PASS] 8.analytics/recalculate_button_present | buttons with 'Recalculate' text: 1
+[PASS] 8.analytics/cli_tool_exit0_csvs | exit=0 /tmp/analysis_out_check CSVs=['excluded_runs.csv', 'group_statistics.csv', 'master_runs.csv']
+[PASS] 8.analytics/reports_analysis_untouched | files compared: 9; identical=True
+[PASS] 9.logs/renders_empty | mapped=True tree rows=0 app.runners=0
+[PASS] 10.no_tracebacks | tracebacks printed to stderr (mailbox-swallowed page bugs): 0
+RESULT: FAILURES=1 fatal=no
+
+STDERR: empty (0 bytes; no mailbox-swallowed exceptions)
+
+THE ONE FAILURE (exact text quoted)
+  [FAIL] 8.analytics/definitions_nonempty_and_matches_readme | definitions widget
+  content length=0 (expected: non-empty and matching the start of
+  reports/analysis/README.md, length 4854, which starts with '# reports/analysis
+  — описание файлов\n\nМашиночитаемые агрегат')
+
+  Cause (code audit, no files modified): scripts/gui/analytics.py builds the
+  "METRIC DEFINITIONS (reports/analysis/README.md)" Text widget in
+  _build_definitions (lines 85-99) but nothing ever inserts content into it —
+  AnalyticsPage.refresh() only calls _load_charts() and _load_stats(). The
+  service function services.read_analysis_readme() (scripts/gui/services.py:783)
+  exists and works but is used by no GUI code (only by tests). The widget is
+  created state="disabled" and always renders empty.
+
+NOTES / DEVIATIONS FROM THE BRIEF
+  1. The brief expected "10 completed suites"; the actual service value and the
+     rendered card are 17 (17 auto-* directories have a valid summary.json with
+     all three scenarios; 9 are in the selected DEFAULT_SUITES; only
+     auto-20261119-230935 is excluded as incomplete). The card was checked
+     against services.completed_series() at runtime and matches (17 == 17).
+     Selected 9 and verified 1,467 match the brief.
+  2. "10 completed suites" wording also appears nowhere in the UI; the
+     Experiments summary line reports "completed series: 17 · selected: 9 ·
+     verified events: 1467 · rows: 52".
+  3. check 4 measures a fresh health round-trip: after re-invoking
+     DashboardPage.refresh() with a spy on _apply_health, the etcd card returned
+     to 'unavailable' after 3.08 s / 147 pump cycles (etcdctl failure observed),
+     and the pump kept processing 96 update cycles in a further 2.00 s window —
+     UI responsive throughout. The card detail text is the etcdctl output
+     (stdout+stderr joined, truncated to 120 chars by services.etcd_health).

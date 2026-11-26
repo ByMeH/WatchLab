@@ -1,0 +1,2 @@
+{"type":"snapshot","run_id":"auto-20261119-233544-comp-a","timestamp":"2026-11-19T18:36:06.534108818Z","prefix":"/watchlab/automated/auto-20261119-233544/compaction/events/","snapshot_revision":2038,"last_revision":2038,"duration_ms":5.94136}
+{"type":"watch_created","run_id":"auto-20261119-233544-comp-a","timestamp":"2026-11-19T18:36:06.536438108Z","start_revision":2039,"last_revision":2038}

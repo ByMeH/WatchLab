@@ -1,0 +1,8 @@
+RECOVER_SNAPSHOT revision=823 keys=0 state=/home/Komi/projects/watchlab/watchlab-pilot/results/automated/auto-20261119-233348/mutations-state.json
+RECOVER_START run_id=auto-20261119-233348-mut prefix=/watchlab/automated/auto-20261119-233348/mutations/ state=/home/Komi/projects/watchlab/watchlab-pilot/results/automated/auto-20261119-233348/mutations-state.json output=/home/Komi/projects/watchlab/watchlab-pilot/results/automated/auto-20261119-233348/mutations-recover.jsonl
+RECOVER_WATCH_START start_revision=824
+RECOVER_WATCH_CREATED start_revision=824
+RECOVER_EVENT type=PUT revision=824 key=/watchlab/automated/auto-20261119-233348/mutations/shared-key
+RECOVER_EVENT type=PUT revision=825 key=/watchlab/automated/auto-20261119-233348/mutations/shared-key
+RECOVER_EVENT type=DELETE revision=826 key=/watchlab/automated/auto-20261119-233348/mutations/shared-key
+RECOVER_STOPPED reason=context canceled last_revision=826

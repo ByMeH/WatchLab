@@ -1,0 +1,290 @@
+WatchLab — GUI fixes re-verification
+====================================
+Date: 2026-11-21
+Scope: PATCH 1 (recovery.py exit-event contract), PATCH 2 (STAGES order swap),
+       PATCH 3 (analytics definitions loader), PATCH 4 (ProcessRunner
+       regression test), PATCH 5 (GUI_GUIDE.md stage order sentence).
+
+Edited files:
+  scripts/gui/recovery.py
+  scripts/gui/analytics.py
+  scripts/test_gui_services.py
+  docs/GUI_GUIDE.md
+No other files were touched; results/, reports/analysis/, main.go, recover.go
+untouched; run_experiments.py was not executed.
+
+UNITED DIFFS OF EDITED FILES
+=========================
+
+
+--- 1. scripts/gui/recovery.py ----------------------------------
+--- /tmp/wl_orig/recovery.py	2026-11-21 19:14:21.465349071 +0500
++++ scripts/gui/recovery.py	2026-11-21 19:11:03.730382606 +0500
+@@ -21,12 +21,12 @@
+     ("Starting isolated etcd", "=== WatchLab demonstration ===",
+      "isolated etcd healthy",
+      "demo.py starts a private single-member etcd on free localhost ports"),
+-    ("Producer started", "$ [producer-recon-p1]",
+-     "reconnect: phase 1 delivered",
+-     "Producer writes phase 1 events; the watcher consumes them"),
+     ("Watch created", "$ [watch-initial]",
+      "reconnect: phase 1 delivered",
+      "watch reports WATCH_CREATED in its console; phase 1 is fully delivered"),
++    ("Producer started", "$ [producer-recon-p1]",
++     "reconnect: phase 1 delivered",
++     "Producer writes phase 1 events; the watcher consumes them"),
+     ("Client disconnected", "reconnect: phase 1 delivered",
+      "reconnect: phase 2 written while Watch was down",
+      "only our own Watch process is stopped; phase 2 is written while nobody watches"),
+@@ -240,11 +240,15 @@
+ 
+     # ------------------------------------------------------------- streaming
+     def _on_event(self, kind: str, ts: float, line: str) -> None:
+-        """Process event from the app dispatcher (UI thread)."""
++        """Process event from the app dispatcher (UI thread).
++
++        Per ProcessRunner's queue contract the exit code travels in the ts
++        slot ("exit", exit_code, "") with an empty payload line.
++        """
+         if kind == "out":
+             self._on_line(ts, line)
+         elif kind == "exit":
+-            self._on_exit(int(line))
++            self._on_exit(int(ts))
+ 
+     def _on_line(self, ts: float, line: str) -> None:
+         self._lines.append((ts, line))
+@@ -291,7 +295,7 @@
+             if tail:
+                 self._summary_path = tail.split()[0]
+         if "reconnect: phase 1 delivered" in line:
+-            self._set_stage(2, STAGE_DONE)  # watch created proven by delivery
++            self._set_stage(2, STAGE_DONE)  # phase-1 delivery proves the producer and the watch ran
+         if "compaction: COMPACTED detected" in line:
+             self._set_stage(7, STAGE_DONE)  # fresh snapshot taken on the same line
+ 
+
+--- 2. scripts/gui/analytics.py ---------------------------------
+--- /tmp/wl_orig/analytics.py	2026-11-21 19:14:21.466479989 +0500
++++ scripts/gui/analytics.py	2026-11-21 19:11:12.638029089 +0500
+@@ -104,6 +104,7 @@
+             text=services.analysis_manifest_summary())
+         self._load_charts()
+         self._load_stats()
++        self._load_definitions()
+ 
+     def _load_charts(self) -> None:
+         holder = self.charts_holder
+@@ -144,6 +145,17 @@
+         except OSError:
+             self.app.set_status(f"cannot open {path.name}: no xdg-open")
+ 
++    def _load_definitions(self) -> None:
++        text = services.read_analysis_readme()
++        self.definitions.configure(state="normal")
++        self.definitions.delete("1.0", "end")
++        if text.strip():
++            self.definitions.insert("1.0", text)
++        else:
++            self.definitions.insert("1.0",
++                                    "reports/analysis/README.md not found; run Recalculate.")
++        self.definitions.configure(state="disabled")
++
+     def _load_stats(self) -> None:
+         rows = services.load_group_stats()
+         metrics = ["all"]
+
+--- 3. scripts/test_gui_services.py -----------------------------
+--- /tmp/wl_orig/test_gui_services.py	2026-11-21 19:14:21.467116871 +0500
++++ scripts/test_gui_services.py	2026-11-21 19:11:12.645031144 +0500
+@@ -362,6 +362,15 @@
+             self.assertEqual([line for _, line in lines], ["line1", "line2"])
+             self.assertTrue(runner.log_path.exists())
+ 
++    def test_exit_event_carries_code_in_ts_slot(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            runner = P.ProcessRunner("exit-contract", [sys.executable, "-c", "pass"],
++                                     Path(tmp))
++            runner.start()
++            runner.wait(10)
++            events = runner.drain()
++            self.assertIn(("exit", 0, ""), events)
++
+     def test_stop_running_process(self):
+         with tempfile.TemporaryDirectory() as tmp:
+             runner = P.ProcessRunner("sleeper", [sys.executable, "-c",
+
+--- 4. docs/GUI_GUIDE.md ----------------------------------------
+--- /tmp/wl_orig/GUI_GUIDE.md	2026-11-21 19:14:21.467765160 +0500
++++ docs/GUI_GUIDE.md	2026-11-21 19:11:12.651032905 +0500
+@@ -45,7 +45,7 @@
+ recovery stages as they actually happen (parsed from demo.py output markers —
+ no stage is shown as done before its marker arrives), a live log with
+ timestamps, and a compact run summary. Stage list: Starting isolated etcd →
+-Producer started → Watch created → Client disconnected → Reconnect with L+1 →
++Watch created → Producer started → Client disconnected → Reconnect with L+1 →
+ Compaction executed → Compaction detected → Range snapshot created → Watch
+ restarted with R+1 → Validation completed. Stop button sends SIGINT/SIGTERM to
+ the demo process tree only (the same sequence demo.py itself uses for its
+
+--- TEST OUTPUTS ---
+$ python3 -m py_compile scripts/*.py scripts/gui/*.py
+exit code: 0 (no output)
+
+$ python3 -m unittest discover -s scripts -p "test_*.py" -v
+test_missing_binary (test_demo.TestBinaryStaleness.test_missing_binary) ... ok
+test_newer_source_detected (test_demo.TestBinaryStaleness.test_newer_source_detected) ... ok
+test_up_to_date_binary (test_demo.TestBinaryStaleness.test_up_to_date_binary) ... ok
+test_invalid_rejected (test_demo.TestParseGoDuration.test_invalid_rejected) ... ok
+test_known_units (test_demo.TestParseGoDuration.test_known_units) ... ok
+test_out_of_range_rejected (test_demo.TestParseGoDuration.test_out_of_range_rejected) ... ok
+test_assert_port_free_detects_busy_port (test_demo.TestPorts.test_assert_port_free_detects_busy_port) ... ok
+test_assert_port_free_passes_on_free_port (test_demo.TestPorts.test_assert_port_free_passes_on_free_port) ... ok
+test_find_free_port_avoids_explicitly_busy (test_demo.TestPorts.test_find_free_port_avoids_explicitly_busy) ... ok
+test_find_free_port_avoids_reserved (test_demo.TestPorts.test_find_free_port_avoids_reserved) ... ok
+test_broken_middle_line_rejected (test_demo.TestReadJsonl.test_broken_middle_line_rejected) ... ok
+test_missing_file_is_empty (test_demo.TestReadJsonl.test_missing_file_is_empty) ... ok
+test_truncated_final_line_tolerated (test_demo.TestReadJsonl.test_truncated_final_line_tolerated) ... ok
+test_valid_records (test_demo.TestReadJsonl.test_valid_records) ... ok
+test_require_passes_silently (test_demo.TestRequire.test_require_passes_silently) ... ok
+test_require_raises_with_message (test_demo.TestRequire.test_require_raises_with_message) ... ok
+test_consistent_state_passes (test_demo.TestVerifyStateMatches.test_consistent_state_passes) ... ok
+test_extra_key_detected (test_demo.TestVerifyStateMatches.test_extra_key_detected) ... ok
+test_missing_key_detected (test_demo.TestVerifyStateMatches.test_missing_key_detected) ... ok
+test_mod_revision_mismatch_detected (test_demo.TestVerifyStateMatches.test_mod_revision_mismatch_detected) ... ok
+test_tampered_value_detected (test_demo.TestVerifyStateMatches.test_tampered_value_detected) ... ok
+test_charts_and_readme (test_gui_services.TestAnalyticsLoaders.test_charts_and_readme) ... ok
+test_group_stats (test_gui_services.TestAnalyticsLoaders.test_group_stats) ... ok
+test_missing_or_corrupted_csv (test_gui_services.TestAnalyticsLoaders.test_missing_or_corrupted_csv) ... ok
+test_missing_binary (test_gui_services.TestBinaryStaleness.test_missing_binary) ... ok
+test_stale_binary_detected (test_gui_services.TestBinaryStaleness.test_stale_binary_detected) ... ok
+test_corrupted_summary_ignored (test_gui_services.TestDemoSummary.test_corrupted_summary_ignored) ... ok
+test_latest_summary_selected (test_gui_services.TestDemoSummary.test_latest_summary_selected) ... ok
+test_no_summary (test_gui_services.TestDemoSummary.test_no_summary) ... ok
+test_corrupted_file_is_tolerated (test_gui_services.TestEventLoading.test_corrupted_file_is_tolerated) ... ok
+test_filtering (test_gui_services.TestEventLoading.test_filtering) ... ok
+test_missing_suite_yields_nothing (test_gui_services.TestEventLoading.test_missing_suite_yields_nothing) ... ok
+test_pagination (test_gui_services.TestEventLoading.test_pagination) ... ok
+test_producer_records (test_gui_services.TestEventLoading.test_producer_records) ... ok
+test_recover_records (test_gui_services.TestEventLoading.test_recover_records) ... ok
+test_truncated_lines_skipped (test_gui_services.TestEventLoading.test_truncated_lines_skipped) ... ok
+test_watch_type_normalization (test_gui_services.TestEventLoading.test_watch_type_normalization) ... ok
+test_exit_event_carries_code_in_ts_slot (test_gui_services.TestProcessRunner.test_exit_event_carries_code_in_ts_slot) ... ok
+test_format_helpers (test_gui_services.TestProcessRunner.test_format_helpers) ... ok
+test_missing_executable (test_gui_services.TestProcessRunner.test_missing_executable) ... ok
+test_stop_running_process (test_gui_services.TestProcessRunner.test_stop_running_process) ... ok
+test_stream_and_exit_code (test_gui_services.TestProcessRunner.test_stream_and_exit_code) ... ok
+test_binary_status_and_environment (test_gui_services.TestProjectState.test_binary_status_and_environment) ... ok
+test_real_analysis_files (test_gui_services.TestProjectState.test_real_analysis_files) ... ok
+test_real_project_state (test_gui_services.TestProjectState.test_real_project_state) ... ok
+test_corrupted_json (test_gui_services.TestRecoveryState.test_corrupted_json) ... ok
+test_empty_state (test_gui_services.TestRecoveryState.test_empty_state) ... ok
+test_filter_state_keys (test_gui_services.TestRecoveryState.test_filter_state_keys) ... ok
+test_load_valid_state (test_gui_services.TestRecoveryState.test_load_valid_state) ... ok
+test_missing_file (test_gui_services.TestRecoveryState.test_missing_file) ... ok
+test_mod_revision_read (test_gui_services.TestRecoveryState.test_mod_revision_read) ... ok
+test_snapshot_and_checkpoint_split (test_gui_services.TestRecoveryState.test_snapshot_and_checkpoint_split) ... ok
+test_state_path_discovery (test_gui_services.TestRecoveryState.test_state_path_discovery) ... ok
+test_completeness (test_gui_services.TestSuiteSummary.test_completeness) ... ok
+test_corrupted_summary_raises (test_gui_services.TestSuiteSummary.test_corrupted_summary_raises) ... ok
+test_load_valid_summary (test_gui_services.TestSuiteSummary.test_load_valid_summary) ... ok
+test_missing_summary_is_excluded (test_gui_services.TestSuiteSummary.test_missing_summary_is_excluded) ... ok
+test_missing_summary_raises (test_gui_services.TestSuiteSummary.test_missing_summary_raises) ... ok
+test_unexpected_structure_raises (test_gui_services.TestSuiteSummary.test_unexpected_structure_raises) ... ok
+test_tail_event_at_or_before_snapshot_detected (test_validation.TestCompactionTail.test_tail_event_at_or_before_snapshot_detected) ... ok
+test_tail_missing_event_detected (test_validation.TestCompactionTail.test_tail_missing_event_detected) ... ok
+test_tail_phase1_event_contamination_detected (test_validation.TestCompactionTail.test_tail_phase1_event_contamination_detected) ... ok
+test_tail_success (test_validation.TestCompactionTail.test_tail_success) ... ok
+test_tail_wrong_start_revision_detected (test_validation.TestCompactionTail.test_tail_wrong_start_revision_detected) ... ok
+test_duplicate_event_detected (test_validation.TestMatchEvents.test_duplicate_event_detected) ... ok
+test_full_match_passes (test_validation.TestMatchEvents.test_full_match_passes) ... ok
+test_incomparable_sha_is_not_a_pass (test_validation.TestMatchEvents.test_incomparable_sha_is_not_a_pass) ... ok
+test_key_mismatch_detected (test_validation.TestMatchEvents.test_key_mismatch_detected) ... ok
+test_missing_event_detected (test_validation.TestMatchEvents.test_missing_event_detected) ... ok
+test_non_put_event_is_unexpected (test_validation.TestMatchEvents.test_non_put_event_is_unexpected) ... ok
+test_phase_prefix_violation_is_unexpected (test_validation.TestMatchEvents.test_phase_prefix_violation_is_unexpected) ... ok
+test_revision_mismatch_detected (test_validation.TestMatchEvents.test_revision_mismatch_detected) ... ok
+test_revisions_out_of_order_detected (test_validation.TestMatchEvents.test_revisions_out_of_order_detected) ... ok
+test_sha256_mismatch_detected (test_validation.TestMatchEvents.test_sha256_mismatch_detected) ... ok
+test_unexpected_event_without_producer (test_validation.TestMatchEvents.test_unexpected_event_without_producer) ... ok
+test_mutation_sequence_extra_key_events_detected (test_validation.TestMutationSequence.test_mutation_sequence_extra_key_events_detected) ... ok
+test_mutation_sequence_missing_delete (test_validation.TestMutationSequence.test_mutation_sequence_missing_delete) ... ok
+test_mutation_sequence_success (test_validation.TestMutationSequence.test_mutation_sequence_success) ... ok
+test_mutation_sequence_unexpected_extra (test_validation.TestMutationSequence.test_mutation_sequence_unexpected_extra) ... ok
+test_reconnect_match_and_boundary (test_validation.TestReconnectSplit.test_reconnect_match_and_boundary) ... ok
+test_reconnect_wrong_resume_revision_detected (test_validation.TestReconnectSplit.test_reconnect_wrong_resume_revision_detected) ... ok
+
+----------------------------------------------------------------------
+Ran 81 tests in 0.428s
+
+OK
+
+$ go test -count=1 ./...
+ok  	watchlab	0.015s
+exit code: 0
+
+$ go vet ./...
+exit code: 0 (no output)
+$ gofmt -l .
+exit code: 0 (no files listed)
+
+--- Xvfb GUI DRIVE (fixes re-check) PASS/FAIL LOG ---
+prior demo_ids in /tmp: 6
+PASS a1 definitions Text non-empty | chars=4853
+PASS a2 definitions first line matches README | first_line='# reports/analysis — описание файлов'
+PASS b1 all stage states pending before run | states=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+PASS b2 demo finished within 180s with exit code 0 | exit_code=0
+PASS c1 btn_run state normal | state=normal
+PASS c2 btn_stop state disabled | state=disabled
+PASS c3 result_body contains overall: PASS | body_head='demo 20261121-191336-639504 · overall: PASS'
+PASS c4 demo_id is new (not from any previous run) | demo_id='20261121-191336-639504'
+PASS c5 all 10 stage states == 2 (DONE) | states=[2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+PASS c6 progress label stages: 10/10 | label='stages: 10/10'
+PASS c7 btn_inspect state normal | state=normal
+PASS d1 inspector window opened
+PASS d2 inspector keys cell == state.json key count | cell=15 state=15
+PASS d3 inspector keys cell == 15 | cell=15
+PASS d4 inspector snapshot cell matches state.json | cell=21 state=21
+PASS d5 inspector last cell matches state.json | cell=26 state=26
+PASS e1 logs demo row shows exit code 0 | row=('demo', 'finished', '0', '4.4s', 'demo-20261121-191335-125067.log')
+activation_order (exact via _set_stage hook): [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+activation_order (sampled every ~0.4s): [0, 1, 2, 3, 4, 5, 8]
+snapshots (n=11): [[1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [2, 1, 1, 0, 0, 0, 0, 0, 0, 0], [2, 2, 2, 1, 0, 0, 0, 0, 0, 0], [2, 2, 2, 2, 1, 0, 0, 0, 0, 0], [2, 2, 2, 2, 2, 1, 0, 0, 0, 0], [2, 2, 2, 2, 2, 1, 0, 0, 0, 0], [2, 2, 2, 2, 2, 2, 2, 2, 1, 0], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]]
+PASS b3 activation order is exactly 0..9 | order=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+PASS b4 sampled order shows no out-of-order activation (short ACTIVE windows may be missed by 0.4s sampling) | order=[0, 1, 2, 3, 4, 5, 8]
+SUMMARY: 19/19 checks passed
+(stderr of the drive run was empty; a previous invocation before the final script cleanup showed only harmless Tcl 'invalid command name' after-callback noise from pumping after destroy, unrelated to the fixes)
+--- 7. Orphan / port check -------------------------------------------------
+
+$ pgrep -af "etcd|watchlab|demo.py"   (filtered for the pgrep line itself)
+no orphan etcd/watchlab/demo.py processes found (pgrep exit 1 for both filters)
+demo client port 33143 / peer port 36677 (demo 20261121-191336-639504):
+$ ss -ltn | grep -E ":(33143|36677)\b"
+demo ports 33143/36677 not listening (OK)
+stderr of the Xvfb run: empty
+
+--- 8. Exact commands used -------------------------------------------------
+
+1. python3 -m py_compile scripts/*.py scripts/gui/*.py
+2. python3 -m unittest discover -s scripts -p "test_*.py" -v
+3. go test -count=1 ./...
+   go vet ./...
+   gofmt -l .
+4. xvfb-run -a -s "-screen 0 1280x900x24" python3 /tmp/wl_recheck.py
+   (drive script /tmp/wl_recheck.py: launches WatchLabApp, checks analytics
+   definitions, runs page.run_demo() while recording stage activation via a
+   _set_stage hook plus 0.4s state sampling, checks post-exit UI state,
+   opens and verifies the state inspector, checks the Logs page row, closes.)
+5. pgrep -af "etcd|watchlab|demo.py" (orphan check)
+   ss -ltn | grep -E ":(33143|36677)\b" (demo port check)
+
+--- VERDICT ---------------------------------------------------------------
+
+All five patches applied; 81/81 Python unit tests OK (incl. the new
+test_exit_event_carries_code_in_ts_slot), Go test/vet/gofmt clean,
+19/19 GUI drive checks PASS under Xvfb. Observed stage activation order was
+exactly 0,1,2,3,4,5,6,7,8,9 (via the _set_stage hook; the ~0.4s sampling saw
+the same prefix 0,1,2,3,4,5,8 with no out-of-order activation — stages 6, 7
+and 9 held STAGE_ACTIVE shorter than one sampling interval and were missed by
+sampling only). No orphan processes; demo ports released. All checks PASS.
+

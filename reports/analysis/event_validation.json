@@ -1,0 +1,379 @@
+{
+  "description": "Offline event-level re-validation of the nine selected suites with scripts/validation.py (read-only; matching by request_id with per-field comparison of key, revision, sequence, run_id and SHA-256 over the raw watcher value vs producer value_sha256; no etcd access; raw JSONL unchanged).",
+  "validator": "scripts/validation.py",
+  "suite_count": 9,
+  "all_ok": true,
+  "totals": {
+    "reconnect": {
+      "requested": 960,
+      "matched": 960,
+      "missing": 0,
+      "duplicates": 0,
+      "unexpected": 0,
+      "mismatches": 0,
+      "incomparable": 0
+    },
+    "compaction_tail": {
+      "requested": 480,
+      "matched": 480,
+      "missing": 0,
+      "duplicates": 0,
+      "unexpected": 0,
+      "mismatches": 0,
+      "incomparable": 0
+    },
+    "same_key": {
+      "requested": 27,
+      "matched": 27,
+      "missing": 0,
+      "duplicates": 0,
+      "unexpected": 0,
+      "mismatches": 0,
+      "incomparable": 0
+    }
+  },
+  "suites": {
+    "auto-20261119-233338": {
+      "reconnect": {
+        "requested": 20,
+        "matched": 20,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "compaction_tail": {
+        "requested": 10,
+        "matched": 10,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "same_key": {
+        "requested": 3,
+        "matched": 3,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": false,
+        "boundary_anomalies": [],
+        "ok": true
+      }
+    },
+    "auto-20261119-233343": {
+      "reconnect": {
+        "requested": 20,
+        "matched": 20,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "compaction_tail": {
+        "requested": 10,
+        "matched": 10,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "same_key": {
+        "requested": 3,
+        "matched": 3,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": false,
+        "boundary_anomalies": [],
+        "ok": true
+      }
+    },
+    "auto-20261119-233348": {
+      "reconnect": {
+        "requested": 20,
+        "matched": 20,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "compaction_tail": {
+        "requested": 10,
+        "matched": 10,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "same_key": {
+        "requested": 3,
+        "matched": 3,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": false,
+        "boundary_anomalies": [],
+        "ok": true
+      }
+    },
+    "auto-20261119-233353": {
+      "reconnect": {
+        "requested": 100,
+        "matched": 100,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "compaction_tail": {
+        "requested": 50,
+        "matched": 50,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "same_key": {
+        "requested": 3,
+        "matched": 3,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": false,
+        "boundary_anomalies": [],
+        "ok": true
+      }
+    },
+    "auto-20261119-233415": {
+      "reconnect": {
+        "requested": 100,
+        "matched": 100,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "compaction_tail": {
+        "requested": 50,
+        "matched": 50,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "same_key": {
+        "requested": 3,
+        "matched": 3,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": false,
+        "boundary_anomalies": [],
+        "ok": true
+      }
+    },
+    "auto-20261119-233438": {
+      "reconnect": {
+        "requested": 100,
+        "matched": 100,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "compaction_tail": {
+        "requested": 50,
+        "matched": 50,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "same_key": {
+        "requested": 3,
+        "matched": 3,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": false,
+        "boundary_anomalies": [],
+        "ok": true
+      }
+    },
+    "auto-20261119-233500": {
+      "reconnect": {
+        "requested": 200,
+        "matched": 200,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "compaction_tail": {
+        "requested": 100,
+        "matched": 100,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "same_key": {
+        "requested": 3,
+        "matched": 3,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": false,
+        "boundary_anomalies": [],
+        "ok": true
+      }
+    },
+    "auto-20261119-233544": {
+      "reconnect": {
+        "requested": 200,
+        "matched": 200,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "compaction_tail": {
+        "requested": 100,
+        "matched": 100,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "same_key": {
+        "requested": 3,
+        "matched": 3,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": false,
+        "boundary_anomalies": [],
+        "ok": true
+      }
+    },
+    "auto-20261119-233628": {
+      "reconnect": {
+        "requested": 200,
+        "matched": 200,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "compaction_tail": {
+        "requested": 100,
+        "matched": 100,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": true,
+        "boundary_anomalies": [],
+        "ok": true
+      },
+      "same_key": {
+        "requested": 3,
+        "matched": 3,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "mismatches": 0,
+        "incomparable": 0,
+        "sha256_compared": false,
+        "boundary_anomalies": [],
+        "ok": true
+      }
+    }
+  }
+}

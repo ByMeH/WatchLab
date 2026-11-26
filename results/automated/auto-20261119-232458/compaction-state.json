@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "prefix": "/watchlab/automated/auto-20261119-232458/compaction/events/",
+  "snapshot_revision": 684,
+  "last_revision": 694,
+  "updated_at": "2026-11-19T18:25:02.684033131Z",
+  "snapshot_duration_ms": 1.887967,
+  "data_bytes": 2619,
+  "keys": {
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase1/000001": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p1\",\"sequence\":1,\"request_id\":\"auto-20261119-232458-comp-p1-000001\",\"created_at\":\"2026-11-19T18:25:00.530226002Z\",\"message\":\"watchlab test event 000001\"}",
+      "create_revision": 675,
+      "mod_revision": 675,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase1/000002": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p1\",\"sequence\":2,\"request_id\":\"auto-20261119-232458-comp-p1-000002\",\"created_at\":\"2026-11-19T18:25:00.639033934Z\",\"message\":\"watchlab test event 000002\"}",
+      "create_revision": 676,
+      "mod_revision": 676,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase1/000003": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p1\",\"sequence\":3,\"request_id\":\"auto-20261119-232458-comp-p1-000003\",\"created_at\":\"2026-11-19T18:25:00.745436721Z\",\"message\":\"watchlab test event 000003\"}",
+      "create_revision": 677,
+      "mod_revision": 677,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase1/000004": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p1\",\"sequence\":4,\"request_id\":\"auto-20261119-232458-comp-p1-000004\",\"created_at\":\"2026-11-19T18:25:00.85217325Z\",\"message\":\"watchlab test event 000004\"}",
+      "create_revision": 678,
+      "mod_revision": 678,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase1/000005": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p1\",\"sequence\":5,\"request_id\":\"auto-20261119-232458-comp-p1-000005\",\"created_at\":\"2026-11-19T18:25:00.958712165Z\",\"message\":\"watchlab test event 000005\"}",
+      "create_revision": 679,
+      "mod_revision": 679,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase1/000006": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p1\",\"sequence\":6,\"request_id\":\"auto-20261119-232458-comp-p1-000006\",\"created_at\":\"2026-11-19T18:25:01.065340263Z\",\"message\":\"watchlab test event 000006\"}",
+      "create_revision": 680,
+      "mod_revision": 680,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase1/000007": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p1\",\"sequence\":7,\"request_id\":\"auto-20261119-232458-comp-p1-000007\",\"created_at\":\"2026-11-19T18:25:01.17208084Z\",\"message\":\"watchlab test event 000007\"}",
+      "create_revision": 681,
+      "mod_revision": 681,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase1/000008": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p1\",\"sequence\":8,\"request_id\":\"auto-20261119-232458-comp-p1-000008\",\"created_at\":\"2026-11-19T18:25:01.282032428Z\",\"message\":\"watchlab test event 000008\"}",
+      "create_revision": 682,
+      "mod_revision": 682,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase1/000009": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p1\",\"sequence\":9,\"request_id\":\"auto-20261119-232458-comp-p1-000009\",\"created_at\":\"2026-11-19T18:25:01.388517986Z\",\"message\":\"watchlab test event 000009\"}",
+      "create_revision": 683,
+      "mod_revision": 683,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase1/000010": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p1\",\"sequence\":10,\"request_id\":\"auto-20261119-232458-comp-p1-000010\",\"created_at\":\"2026-11-19T18:25:01.494881823Z\",\"message\":\"watchlab test event 000010\"}",
+      "create_revision": 684,
+      "mod_revision": 684,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase2/000001": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p2\",\"sequence\":1,\"request_id\":\"auto-20261119-232458-comp-p2-000001\",\"created_at\":\"2026-11-19T18:25:01.713012252Z\",\"message\":\"watchlab test event 000001\"}",
+      "create_revision": 685,
+      "mod_revision": 685,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase2/000002": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p2\",\"sequence\":2,\"request_id\":\"auto-20261119-232458-comp-p2-000002\",\"created_at\":\"2026-11-19T18:25:01.823294932Z\",\"message\":\"watchlab test event 000002\"}",
+      "create_revision": 686,
+      "mod_revision": 686,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase2/000003": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p2\",\"sequence\":3,\"request_id\":\"auto-20261119-232458-comp-p2-000003\",\"created_at\":\"2026-11-19T18:25:01.929662288Z\",\"message\":\"watchlab test event 000003\"}",
+      "create_revision": 687,
+      "mod_revision": 687,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase2/000004": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p2\",\"sequence\":4,\"request_id\":\"auto-20261119-232458-comp-p2-000004\",\"created_at\":\"2026-11-19T18:25:02.036531781Z\",\"message\":\"watchlab test event 000004\"}",
+      "create_revision": 688,
+      "mod_revision": 688,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase2/000005": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p2\",\"sequence\":5,\"request_id\":\"auto-20261119-232458-comp-p2-000005\",\"created_at\":\"2026-11-19T18:25:02.14329449Z\",\"message\":\"watchlab test event 000005\"}",
+      "create_revision": 689,
+      "mod_revision": 689,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase2/000006": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p2\",\"sequence\":6,\"request_id\":\"auto-20261119-232458-comp-p2-000006\",\"created_at\":\"2026-11-19T18:25:02.249885042Z\",\"message\":\"watchlab test event 000006\"}",
+      "create_revision": 690,
+      "mod_revision": 690,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase2/000007": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p2\",\"sequence\":7,\"request_id\":\"auto-20261119-232458-comp-p2-000007\",\"created_at\":\"2026-11-19T18:25:02.356699033Z\",\"message\":\"watchlab test event 000007\"}",
+      "create_revision": 691,
+      "mod_revision": 691,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase2/000008": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p2\",\"sequence\":8,\"request_id\":\"auto-20261119-232458-comp-p2-000008\",\"created_at\":\"2026-11-19T18:25:02.463250059Z\",\"message\":\"watchlab test event 000008\"}",
+      "create_revision": 692,
+      "mod_revision": 692,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase2/000009": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p2\",\"sequence\":9,\"request_id\":\"auto-20261119-232458-comp-p2-000009\",\"created_at\":\"2026-11-19T18:25:02.573133946Z\",\"message\":\"watchlab test event 000009\"}",
+      "create_revision": 693,
+      "mod_revision": 693,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-232458/compaction/events/phase2/000010": {
+      "value": "{\"run_id\":\"auto-20261119-232458-comp-p2\",\"sequence\":10,\"request_id\":\"auto-20261119-232458-comp-p2-000010\",\"created_at\":\"2026-11-19T18:25:02.679597482Z\",\"message\":\"watchlab test event 000010\"}",
+      "create_revision": 694,
+      "mod_revision": 694,
+      "version": 1
+    }
+  }
+}

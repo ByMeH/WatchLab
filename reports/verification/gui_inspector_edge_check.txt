@@ -1,0 +1,86 @@
+WatchLab Desktop GUI verification — Recovery State Inspector edge cases (drive script 2)
+Date: 2026-11-21 18:58 local (+05) · host: no real display, Xvfb 1280x900x24
+Verdict: 23 PASS / 0 FAIL / 0 tracebacks / exit code 0 — ALL PASS
+
+COMMANDS USED (exact)
+  python3 -m py_compile /tmp/wl_gui_drive2.py
+  xvfb-run -a -s "-screen 0 1280x900x24" python3 /tmp/wl_gui_drive2.py
+
+SCRIPT SOURCE (stays in /tmp, not copied into the project)
+  /tmp/wl_gui_drive2.py — single-threaded GUI drive: WatchLabApp instantiated,
+  StateInspectorDialog(app, path) opened per case, pumped with app.update() +
+  time.sleep(0.02) (2.0 s per load, worker result arrives via app.ui_call);
+  every dialog closed via _on_close(); app always destroyed in finally; stderr
+  teed to catch mailbox-swallowed exceptions (traceback.print_exc).
+  Raw run log: /tmp/wl_drive2_log.txt, stdout /tmp/wl_drive2.out, stderr (empty): /tmp/wl_drive2.err
+
+CRAFTED /TMP INPUTS (created by the script; project untouched)
+  /tmp/watchlab-no-such-dir/state.json   — intentionally absent (missing case)
+  /tmp/wl-verify-broken-state.json       — '{"snapshot_revision": 21, "keys": {'  (truncated)
+  /tmp/wl-verify-wrongstruct-state.json  — '{"keys": "not-an-object"}'
+  /tmp/wl-verify-state.json — real-shaped state modelled on recover.go's
+      recoveryState/recoveryKV schema (schema_version, prefix, snapshot_revision,
+      last_revision, updated_at, data_bytes, keys{key:{value, mod_revision,
+      create_revision, version}}):
+        prefix '/watchlab/demo/x/compaction/events/', snapshot_revision R=21,
+        last_revision L=26, data_bytes=1000, 9 keys:
+        p1/000001 mod 12; p1/000002 mod 13; p1/000003 mod 14 with value 'A'*5000
+        (LONG); p2/000004 mod 18; p2/000005 mod 19; p2/000006 with NO
+        mod_revision field (tests omitempty -> None); p3/000007 mod 22,
+        p3/000008 mod 23, p3/000009 mod 26 with JSON-string values
+        {"sequence":N,"request_id":"req-00000X"}.
+  /tmp/wl-verify-empty-state.json — {"keys": {}}, R=L=5, data_bytes=0.
+
+FULL LOG (verbatim stdout)
+[PASS] 0.state_files_prepared | corrupted=/tmp/wl-verify-broken-state.json wrongstruct=/tmp/wl-verify-wrongstruct-state.json good=/tmp/wl-verify-state.json empty=/tmp/wl-verify-empty-state.json; missing path intentionally absent=/tmp/watchlab-no-such-dir/state.json
+[PASS] 1.missing/banner_mapped_and_notfound | mapped=True text='state.json not found: /tmp/watchlab-no-such-dir/state.json\nRun the demo first (Recovery page, ▶ Run demo) — after a finished run its recovered state becomes inspectable here.'
+[PASS] 1.missing/metric_cells_em_dash | cells={'snapshot': '—', 'last': '—', 'keys': '—', 'bytes': '—'} (expected all '—')
+[PASS] 1.missing/no_rows | rows=0
+[PASS] 2.corrupted/banner_corrupted | mapped=True text='state.json is corrupted and cannot be parsed:\ncorrupted JSON in /tmp/wl-verify-broken-state.json: Expecting property name enclosed in double quotes: line 1 column 36 (char 35)'
+[PASS] 3.wrongstruct/banner_unexpected | mapped=True text="unexpected state.json structure:\n'keys' is not an object in /tmp/wl-verify-wrongstruct-state.json"
+[PASS] 4.good/metrics | cells={'snapshot': '21', 'last': '26', 'keys': '9', 'bytes': '1,000'}
+[PASS] 4.good/delta_text | delta='Watch events were applied after the snapshot: the checkpoint advanced by 5 revision(s) (L 26 − R 21); 3 of 9 key(s) have mod_revision > R.'
+[PASS] 4.good/no_banner | banner text=''
+[PASS] 4.good/search_000003 | count='1 key(s)' rows=[('/watchlab/demo/x/compaction/events/p1/000003', '14', 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA…')]
+[PASS] 4.good/search_cleared_all_keys | count='9 key(s)' rows=9
+[PASS] 4.good/scope_changed_after_snapshot | count='3 key(s)' mods=['22', '23', '26']
+[PASS] 4.good/scope_from_snapshot | count='6 key(s)' keys=['/watchlab/demo/x/compaction/events/p1/000001', '/watchlab/demo/x/compaction/events/p1/000002', '/watchlab/demo/x/compaction/events/p1/000003', '/watchlab/demo/x/compaction/events/p2/000004', '/watchlab/demo/x/compaction/events/p2/000005', '/watchlab/demo/x/compaction/events/p2/000006']
+[PASS] 4.good/scope_all_back | count='9 key(s)' rows=9
+[PASS] 4.good/omitempty_mod_revision_empty | row=[('/watchlab/demo/x/compaction/events/p2/000006', '', 'value-phase2-3')]
+[PASS] 4.good/long_value_row_present | rows containing p1/000003: 1
+[PASS] 4.good/long_value_truncated | cell length=96 (limit 96) ends with ellipsis=True first 10 chars='AAAAAAAAAA'
+[PASS] 4.good/value_dialog_exists | toplevels of inspector: 1 titles=['Value · …/watchlab/demo/x/compaction/events/p1/000003']
+[PASS] 4.good/value_dialog_full_content | text content length=5000 equals raw 5000 chars=True
+[PASS] 4.good/value_dialog_mod_revision_label | labels=['mod_revision: 14   ·   5,000 characters']
+[PASS] 5.empty/count_label_no_keys | count='recovered state has no keys (empty state map)'
+[PASS] 5.empty/no_banner_and_zero_keys | banner mapped=False keys cell='0' delta='No watch events applied after the snapshot (L = R = 5); the '
+[PASS] 6.no_tracebacks | tracebacks printed to stderr (mailbox-swallowed page bugs): 0
+RESULT: ALL PASS
+
+STDERR: empty (0 bytes; no mailbox-swallowed exceptions)
+
+NOTES / DEVIATIONS FROM THE BRIEF
+  1. Wrong-structure case written to its own file
+     /tmp/wl-verify-wrongstruct-state.json (the brief did not name a path for it;
+     the corrupted file was kept intact for its own case). Same service reason
+     "unexpected" is exercised either way.
+  2. The brief asked for "assert '9 keys'" after clearing the search; the actual
+     counter text is '9 key(s)' (format "{n:,} key(s)") — asserted exactly.
+  3. The key without the mod_revision field was placed on a phase-2 key
+     (p2/000006) so that the nominal phase counts stay consistent with the
+     downstream assertions: changed-after-snapshot = 3 (mods 22, 23, 26),
+     from-snapshot = 6 (includes the omitempty key), total = 9, delta = 5, and
+     the long-value key p1/000003 keeps its mod_revision 14 so the ValueDialog
+     label check is unambiguous. The omitempty key renders an empty mod column.
+  4. Semantics confirmed in the dialog (no source changes): key count is the
+     current state-map size, snapshot_revision (R) and last_revision (L) are
+     shown as separate metrics, delta explains L − R = 5 with "3 of 9" keys
+     changed after the snapshot; the 5000-char value is truncated to 96 chars
+     ('…'-terminated) in the table but shown in full (5000 chars) in the
+     ValueDialog; etcd is never queried (file parsed only).
+
+AFTER BOTH SCRIPTS — leftover-process check (exact commands)
+  pgrep -af 'etcd|watchlab'        -> only the pgrep shell itself matched;
+  ps -eo pid,comm | grep -iE 'etcd|watchlab|Xvfb' -> no output, exit=1.
+  Verdict: no leftover etcd/watchlab/Xvfb processes; the xvfb-run Xvfb exited by
+  itself when each drive script finished.

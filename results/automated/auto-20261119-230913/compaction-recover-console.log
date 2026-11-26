@@ -1,0 +1,59 @@
+RECOVER_STATE_LOADED revision=394 keys=0 state=/home/Komi/projects/watchlab/watchlab-pilot/results/automated/auto-20261119-230913/compaction-state.json
+RECOVER_START run_id=auto-20261119-230913-comp-b prefix=/watchlab/automated/auto-20261119-230913/compaction/events/ state=/home/Komi/projects/watchlab/watchlab-pilot/results/automated/auto-20261119-230913/compaction-state.json output=/home/Komi/projects/watchlab/watchlab-pilot/results/automated/auto-20261119-230913/compaction-recover-after.jsonl
+RECOVER_WATCH_START start_revision=395
+RECOVER_WATCH_CREATED start_revision=395
+RECOVER_COMPACTED compact_revision=444 last_revision=394; taking a new snapshot
+RECOVER_SNAPSHOT revision=444 keys=50 state=/home/Komi/projects/watchlab/watchlab-pilot/results/automated/auto-20261119-230913/compaction-state.json
+RECOVER_WATCH_START start_revision=445
+RECOVER_WATCH_CREATED start_revision=445
+RECOVER_EVENT type=PUT revision=445 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000001
+RECOVER_EVENT type=PUT revision=446 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000002
+RECOVER_EVENT type=PUT revision=447 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000003
+RECOVER_EVENT type=PUT revision=448 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000004
+RECOVER_EVENT type=PUT revision=449 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000005
+RECOVER_EVENT type=PUT revision=450 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000006
+RECOVER_EVENT type=PUT revision=451 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000007
+RECOVER_EVENT type=PUT revision=452 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000008
+RECOVER_EVENT type=PUT revision=453 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000009
+RECOVER_EVENT type=PUT revision=454 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000010
+RECOVER_EVENT type=PUT revision=455 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000011
+RECOVER_EVENT type=PUT revision=456 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000012
+RECOVER_EVENT type=PUT revision=457 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000013
+RECOVER_EVENT type=PUT revision=458 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000014
+RECOVER_EVENT type=PUT revision=459 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000015
+RECOVER_EVENT type=PUT revision=460 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000016
+RECOVER_EVENT type=PUT revision=461 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000017
+RECOVER_EVENT type=PUT revision=462 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000018
+RECOVER_EVENT type=PUT revision=463 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000019
+RECOVER_EVENT type=PUT revision=464 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000020
+RECOVER_EVENT type=PUT revision=465 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000021
+RECOVER_EVENT type=PUT revision=466 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000022
+RECOVER_EVENT type=PUT revision=467 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000023
+RECOVER_EVENT type=PUT revision=468 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000024
+RECOVER_EVENT type=PUT revision=469 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000025
+RECOVER_EVENT type=PUT revision=470 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000026
+RECOVER_EVENT type=PUT revision=471 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000027
+RECOVER_EVENT type=PUT revision=472 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000028
+RECOVER_EVENT type=PUT revision=473 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000029
+RECOVER_EVENT type=PUT revision=474 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000030
+RECOVER_EVENT type=PUT revision=475 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000031
+RECOVER_EVENT type=PUT revision=476 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000032
+RECOVER_EVENT type=PUT revision=477 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000033
+RECOVER_EVENT type=PUT revision=478 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000034
+RECOVER_EVENT type=PUT revision=479 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000035
+RECOVER_EVENT type=PUT revision=480 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000036
+RECOVER_EVENT type=PUT revision=481 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000037
+RECOVER_EVENT type=PUT revision=482 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000038
+RECOVER_EVENT type=PUT revision=483 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000039
+RECOVER_EVENT type=PUT revision=484 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000040
+RECOVER_EVENT type=PUT revision=485 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000041
+RECOVER_EVENT type=PUT revision=486 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000042
+RECOVER_EVENT type=PUT revision=487 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000043
+RECOVER_EVENT type=PUT revision=488 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000044
+RECOVER_EVENT type=PUT revision=489 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000045
+RECOVER_EVENT type=PUT revision=490 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000046
+RECOVER_EVENT type=PUT revision=491 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000047
+RECOVER_EVENT type=PUT revision=492 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000048
+RECOVER_EVENT type=PUT revision=493 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000049
+RECOVER_EVENT type=PUT revision=494 key=/watchlab/automated/auto-20261119-230913/compaction/events/phase2/000050
+RECOVER_STOPPED reason=context canceled last_revision=494

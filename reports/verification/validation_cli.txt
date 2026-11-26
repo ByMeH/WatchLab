@@ -1,0 +1,102 @@
+# python3 scripts/validation.py --suite results/automated/auto-20261119-233338
+{
+  "suite_id": "auto-20261119-233338",
+  "scenarios": {
+    "reconnect": {
+      "requested": 20,
+      "observed_watcher_events": 20,
+      "matched": 20,
+      "missing_ids": [],
+      "missing_count": 0,
+      "duplicates": [],
+      "duplicate_count": 0,
+      "unexpected": [],
+      "unexpected_count": 0,
+      "mismatches": [],
+      "mismatch_count": 0,
+      "incomparable": [],
+      "incomparable_count": 0,
+      "producer_duplicate_count": 0,
+      "producer_anomalies": [],
+      "revisions_ordered": true,
+      "revisions_strictly_increasing": true,
+      "compared_fields": [
+        "key",
+        "revision",
+        "sequence",
+        "run_id",
+        "value_sha256"
+      ],
+      "ok": true,
+      "boundary": {
+        "initial_last_revision": 707,
+        "resumed_first_revision": 708
+      },
+      "boundary_anomalies": []
+    },
+    "compaction_tail": {
+      "requested": 10,
+      "observed_watcher_events": 10,
+      "matched": 10,
+      "missing_ids": [],
+      "missing_count": 0,
+      "duplicates": [],
+      "duplicate_count": 0,
+      "unexpected": [],
+      "unexpected_count": 0,
+      "mismatches": [],
+      "mismatch_count": 0,
+      "incomparable": [],
+      "incomparable_count": 0,
+      "producer_duplicate_count": 0,
+      "producer_anomalies": [],
+      "revisions_ordered": true,
+      "revisions_strictly_increasing": true,
+      "compared_fields": [
+        "key",
+        "revision",
+        "sequence",
+        "run_id",
+        "value_sha256"
+      ],
+      "ok": true,
+      "boundary": {
+        "snapshot_revision": 727,
+        "snapshot_key_count": 10,
+        "compact_revision": 727,
+        "snapshot_at_compaction_revision": true,
+        "new_watch_start_revision": 728
+      },
+      "boundary_anomalies": []
+    },
+    "same_key": {
+      "key": "/watchlab/automated/auto-20261119-233338/mutations/shared-key",
+      "expected_types": [
+        "PUT",
+        "PUT",
+        "DELETE"
+      ],
+      "observed_types": [
+        "PUT",
+        "PUT",
+        "DELETE"
+      ],
+      "requested": 3,
+      "matched": 3,
+      "missing_count": 0,
+      "unexpected_count": 0,
+      "extra_key_events": 0,
+      "revisions": [
+        738,
+        739,
+        740
+      ],
+      "revisions_strictly_increasing": true,
+      "validation_scope": "event_type sequence and order only; keys are written with etcdctl, so no producer acks, request_ids or SHA-256 comparison are available",
+      "ok": true,
+      "final_key_absent": true
+    }
+  },
+  "ok": true
+}
+# exit_code: 0

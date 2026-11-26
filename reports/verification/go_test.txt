@@ -1,0 +1,3 @@
+# go test -count=1 ./...
+ok  	watchlab	0.016s
+# exit_code: 0

@@ -1,0 +1,5 @@
+{"type":"snapshot","run_id":"auto-20261119-233544-mut","timestamp":"2026-11-19T18:36:28.434272879Z","prefix":"/watchlab/automated/auto-20261119-233544/mutations/","snapshot_revision":2238,"last_revision":2238,"duration_ms":3.864326}
+{"type":"watch_created","run_id":"auto-20261119-233544-mut","timestamp":"2026-11-19T18:36:28.436109763Z","start_revision":2239,"last_revision":2238}
+{"type":"watch_event","run_id":"auto-20261119-233544-mut","timestamp":"2026-11-19T18:36:28.482957215Z","event_revision":2239,"event_type":"PUT","key":"/watchlab/automated/auto-20261119-233544/mutations/shared-key","value":"{\"version\":1,\"value\":\"first\"}"}
+{"type":"watch_event","run_id":"auto-20261119-233544-mut","timestamp":"2026-11-19T18:36:28.511737635Z","event_revision":2240,"event_type":"PUT","key":"/watchlab/automated/auto-20261119-233544/mutations/shared-key","value":"{\"version\":2,\"value\":\"updated\"}"}
+{"type":"watch_event","run_id":"auto-20261119-233544-mut","timestamp":"2026-11-19T18:36:28.541437582Z","event_revision":2241,"event_type":"DELETE","key":"/watchlab/automated/auto-20261119-233544/mutations/shared-key"}

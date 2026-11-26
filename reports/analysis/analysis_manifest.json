@@ -1,0 +1,75 @@
+{
+  "source_root": "results/automated",
+  "selected_sizes": [
+    10,
+    50,
+    100
+  ],
+  "included_suite_ids": [
+    "auto-20261119-233338",
+    "auto-20261119-233343",
+    "auto-20261119-233348",
+    "auto-20261119-233353",
+    "auto-20261119-233415",
+    "auto-20261119-233438",
+    "auto-20261119-233500",
+    "auto-20261119-233544",
+    "auto-20261119-233628"
+  ],
+  "requested_suite_ids": [
+    "auto-20261119-233338",
+    "auto-20261119-233343",
+    "auto-20261119-233348",
+    "auto-20261119-233353",
+    "auto-20261119-233415",
+    "auto-20261119-233438",
+    "auto-20261119-233500",
+    "auto-20261119-233544",
+    "auto-20261119-233628"
+  ],
+  "excluded_or_skipped": [
+    {
+      "suite_id": "auto-20261119-230422",
+      "reason": "not in selected suite ID set"
+    },
+    {
+      "suite_id": "auto-20261119-230848",
+      "reason": "not in selected suite ID set"
+    },
+    {
+      "suite_id": "auto-20261119-230853",
+      "reason": "not in selected suite ID set"
+    },
+    {
+      "suite_id": "auto-20261119-230858",
+      "reason": "not in selected suite ID set"
+    },
+    {
+      "suite_id": "auto-20261119-230903",
+      "reason": "not in selected suite ID set"
+    },
+    {
+      "suite_id": "auto-20261119-230908",
+      "reason": "not in selected suite ID set"
+    },
+    {
+      "suite_id": "auto-20261119-230913",
+      "reason": "not in selected suite ID set"
+    },
+    {
+      "suite_id": "auto-20261119-230935",
+      "reason": "incomplete run: summary.json is missing"
+    },
+    {
+      "suite_id": "auto-20261119-232458",
+      "reason": "not in selected suite ID set"
+    }
+  ],
+  "run_count": 9,
+  "scenario_rows": 27,
+  "note": "Descriptive statistics from completed summaries. One local single-member etcd environment; do not generalize as a universal benchmark.",
+  "metric_naming": {
+    "client_recovery_interval_ms": "client-side interval from the watch_canceled record to the next watch_created record of this implementation; historical summaries store it as recovery_ms",
+    "phase1_keys_in_snapshot": "number of current keys captured by the Range snapshot (phase 1 keys), not a count of historical events; historical summaries store it as phase1_events_represented_by_snapshot"
+  }
+}

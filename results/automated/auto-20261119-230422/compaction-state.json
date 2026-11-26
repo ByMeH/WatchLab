@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "prefix": "/watchlab/automated/auto-20261119-230422/compaction/events/",
+  "snapshot_revision": 71,
+  "last_revision": 76,
+  "updated_at": "2026-11-19T18:04:24.840617632Z",
+  "snapshot_duration_ms": 1.489877,
+  "data_bytes": 1309,
+  "keys": {
+    "/watchlab/automated/auto-20261119-230422/compaction/events/phase1/000001": {
+      "value": "{\"run_id\":\"auto-20261119-230422-comp-p1\",\"sequence\":1,\"request_id\":\"auto-20261119-230422-comp-p1-000001\",\"created_at\":\"2026-11-19T18:04:23.749995804Z\",\"message\":\"watchlab test event 000001\"}",
+      "create_revision": 67,
+      "mod_revision": 67,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230422/compaction/events/phase1/000002": {
+      "value": "{\"run_id\":\"auto-20261119-230422-comp-p1\",\"sequence\":2,\"request_id\":\"auto-20261119-230422-comp-p1-000002\",\"created_at\":\"2026-11-19T18:04:23.86090221Z\",\"message\":\"watchlab test event 000002\"}",
+      "create_revision": 68,
+      "mod_revision": 68,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230422/compaction/events/phase1/000003": {
+      "value": "{\"run_id\":\"auto-20261119-230422-comp-p1\",\"sequence\":3,\"request_id\":\"auto-20261119-230422-comp-p1-000003\",\"created_at\":\"2026-11-19T18:04:23.966415784Z\",\"message\":\"watchlab test event 000003\"}",
+      "create_revision": 69,
+      "mod_revision": 69,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230422/compaction/events/phase1/000004": {
+      "value": "{\"run_id\":\"auto-20261119-230422-comp-p1\",\"sequence\":4,\"request_id\":\"auto-20261119-230422-comp-p1-000004\",\"created_at\":\"2026-11-19T18:04:24.078599313Z\",\"message\":\"watchlab test event 000004\"}",
+      "create_revision": 70,
+      "mod_revision": 70,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230422/compaction/events/phase1/000005": {
+      "value": "{\"run_id\":\"auto-20261119-230422-comp-p1\",\"sequence\":5,\"request_id\":\"auto-20261119-230422-comp-p1-000005\",\"created_at\":\"2026-11-19T18:04:24.188266778Z\",\"message\":\"watchlab test event 000005\"}",
+      "create_revision": 71,
+      "mod_revision": 71,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230422/compaction/events/phase2/000001": {
+      "value": "{\"run_id\":\"auto-20261119-230422-comp-p2\",\"sequence\":1,\"request_id\":\"auto-20261119-230422-comp-p2-000001\",\"created_at\":\"2026-11-19T18:04:24.412070691Z\",\"message\":\"watchlab test event 000001\"}",
+      "create_revision": 72,
+      "mod_revision": 72,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230422/compaction/events/phase2/000002": {
+      "value": "{\"run_id\":\"auto-20261119-230422-comp-p2\",\"sequence\":2,\"request_id\":\"auto-20261119-230422-comp-p2-000002\",\"created_at\":\"2026-11-19T18:04:24.520589319Z\",\"message\":\"watchlab test event 000002\"}",
+      "create_revision": 73,
+      "mod_revision": 73,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230422/compaction/events/phase2/000003": {
+      "value": "{\"run_id\":\"auto-20261119-230422-comp-p2\",\"sequence\":3,\"request_id\":\"auto-20261119-230422-comp-p2-000003\",\"created_at\":\"2026-11-19T18:04:24.625868612Z\",\"message\":\"watchlab test event 000003\"}",
+      "create_revision": 74,
+      "mod_revision": 74,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230422/compaction/events/phase2/000004": {
+      "value": "{\"run_id\":\"auto-20261119-230422-comp-p2\",\"sequence\":4,\"request_id\":\"auto-20261119-230422-comp-p2-000004\",\"created_at\":\"2026-11-19T18:04:24.731369553Z\",\"message\":\"watchlab test event 000004\"}",
+      "create_revision": 75,
+      "mod_revision": 75,
+      "version": 1
+    },
+    "/watchlab/automated/auto-20261119-230422/compaction/events/phase2/000005": {
+      "value": "{\"run_id\":\"auto-20261119-230422-comp-p2\",\"sequence\":5,\"request_id\":\"auto-20261119-230422-comp-p2-000005\",\"created_at\":\"2026-11-19T18:04:24.836234104Z\",\"message\":\"watchlab test event 000005\"}",
+      "create_revision": 76,
+      "mod_revision": 76,
+      "version": 1
+    }
+  }
+}

@@ -1,0 +1,13 @@
+WATCH_START run_id=auto-20261119-230858-recon-a prefix=/watchlab/automated/auto-20261119-230858/reconnect/events/ start_revision=0 output=/home/Komi/projects/watchlab/watchlab-pilot/results/automated/auto-20261119-230858/reconnect-initial-watch.jsonl
+WATCH_CREATED header_revision=165
+EVENT type=PUT event_revision=166 header_revision=166 key=/watchlab/automated/auto-20261119-230858/reconnect/events/phase1/000001
+EVENT type=PUT event_revision=167 header_revision=167 key=/watchlab/automated/auto-20261119-230858/reconnect/events/phase1/000002
+EVENT type=PUT event_revision=168 header_revision=168 key=/watchlab/automated/auto-20261119-230858/reconnect/events/phase1/000003
+EVENT type=PUT event_revision=169 header_revision=169 key=/watchlab/automated/auto-20261119-230858/reconnect/events/phase1/000004
+EVENT type=PUT event_revision=170 header_revision=170 key=/watchlab/automated/auto-20261119-230858/reconnect/events/phase1/000005
+EVENT type=PUT event_revision=171 header_revision=171 key=/watchlab/automated/auto-20261119-230858/reconnect/events/phase1/000006
+EVENT type=PUT event_revision=172 header_revision=172 key=/watchlab/automated/auto-20261119-230858/reconnect/events/phase1/000007
+EVENT type=PUT event_revision=173 header_revision=173 key=/watchlab/automated/auto-20261119-230858/reconnect/events/phase1/000008
+EVENT type=PUT event_revision=174 header_revision=174 key=/watchlab/automated/auto-20261119-230858/reconnect/events/phase1/000009
+EVENT type=PUT event_revision=175 header_revision=175 key=/watchlab/automated/auto-20261119-230858/reconnect/events/phase1/000010
+WATCH_STOPPED reason=context canceled

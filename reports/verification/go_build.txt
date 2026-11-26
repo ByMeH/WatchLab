@@ -1,0 +1,2 @@
+# go build -o bin/watchlab .
+# exit_code: 0

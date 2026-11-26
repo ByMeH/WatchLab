@@ -1,0 +1,228 @@
+WatchLab Desktop GUI verification — full demo user-path (P4, drive script 2)
+Date: 2026-11-21 19:08 local (+05) · host: no real display, Xvfb 1280x900x24
+Verdict: 53 PASS / 5 FAIL / 1 Python traceback / drive-script exit code 0
+
+COMMAND USED (exact, first line as required)
+  xvfb-run -a -s "-screen 0 1280x900x24" python3 /tmp/wl_gui_demo_path.py
+  (executed from the project root /home/Komi/projects/watchlab/watchlab-pilot;
+   stdout -> /tmp/wl_gui_path_out2.txt, stderr -> /tmp/wl_gui_path_err2.txt)
+
+DRIVE SCRIPT
+  /tmp/wl_gui_demo_path.py (stays in /tmp, not copied into the project).
+  Single-threaded Tk drive: sys.path.insert(0,'scripts');
+  from gui.app import WatchLabApp; app = WatchLabApp(); pump = loop of
+  app.update() + time.sleep(0.02); app always destroyed at the end.
+  The page's _set_stage is wrapped read-only at instance level (all calls run
+  on the UI thread inside app.update()) to record the exact per-demo-line
+  transition order. Evidence JSON: /tmp/wl_gui_demo_path_evidence.json.
+  Raw stdout of this run: /tmp/wl_gui_path_out2.txt (61 lines, quoted in full
+  below); raw stderr: /tmp/wl_gui_path_err2.txt.
+
+EXECUTION HISTORY
+  Run 1 (14:05 UTC / 19:05 local, demo_id 20261121-190500-634187, log
+  /tmp/wl_gui_path_out.txt) exposed two verifier bugs, fixed afterwards:
+  (a) the log-growth assertion demanded strict growth between the first two
+  0.5 s samples, which landed inside the isolated-etcd start silence
+  (lens 2148, 2148, then growing); (b) the per-key state check was fed the
+  RECONNECT producer acks, while state.json legitimately contains only the
+  compaction-prefix keys. Product behaviour was identical in both runs.
+  Run 2 below (demo_id 20261121-190818-636071) is the recorded verification
+  run; its "previous" summary shown at startup is run 1's GUI demo.
+
+PRECONDITIONS CHECKED BEFORE THE RUN
+  - etcd on 2379 down: `ss -ltn` has no 2379/2380 listener (verified 19:00 local).
+  - No etcd/watchlab processes: pgrep -x etcd / pgrep -x watchlab -> empty.
+  - bin/watchlab present (2,129,673 bytes, 2026-11-21 18:45).
+  - Protected tree fingerprint (main.go recover.go go.mod go.sum scripts docs
+    results reports/analysis; path+size+mtime_ns, sha256) identical before and
+    after both runs: TREE_UNCHANGED. Only reports/verification/ (this file)
+    plus GUI-owned outputs (logs/gui/*.log, /tmp/watchlab-demo-*) were written.
+  - run_experiments.py NOT run; scripts/demo.py NOT run by the verifier
+  directly — both demo runs were started by the GUI (page.run_demo()).
+
+FULL LOG (verbatim stdout of run 2)
+[PASS] 1.launch_and_recovery_page | title='WatchLab Desktop' recovery_frame_mapped=1
+[PASS] 2.prerun_btn_run_normal | state='normal'
+[PASS] 2.prerun_btn_stop_disabled | state='disabled'
+[PASS] 2.prerun_result_body_previous_summary | result_body='demo 20261121-190500-634187 · overall: PASS · 15 verified events' | services.last_demo_summary().demo_id='20261121-190500-634187'
+[PASS] 2.prerun_btn_inspect_normal | state='normal' (pre-run; previous demo state file exists)
+[PASS] 3.run_started | runner=yes running=True btn_command_tcl_registered=True (theme.py:150 command=run_demo)
+[PASS] 3.run_command_gui_args | command=['/usr/bin/python3', 'scripts/demo.py', '--events', '5', '--interval', '100ms', '--timeout', '30.0']
+[PASS] 3a.log_grows_over_samples | lens_per_sample=[2148, 2148, 3127, 3558, 4550, 4944, 5991, 6451, 7998] non_shrinking=True strict_increases=7 (bursty demo output: ties expected during the isolated-etcd start silence; first 3 samples recorded below)
+[PASS] 3a.log_has_gui_starting_line | 'GUI: starting:' in log=True log_len=7998
+[PASS] 3a.log_has_spawn_producer_line_later | idx(GUI: starting:)=11 idx($ [producer-recon-p1])=2783
+  3 samples: #1 t=0.47s len=2148 last='token watchlab-demo-20261121-190818-636071 --initial-cluster-state new' | #2 t=0.94s len=2148 last='token watchlab-demo-20261121-190818-636071 --initial-cluster-state new' | #3 t=1.4s len=3127 last='watchlab-demo-20261121-190818-636071/reconnect/producer-recon-p1.jsonl'
+[FAIL] 3b.stages_activate_in_index_order_strict | observed_first_activation_order(stage,line#)=[(0, 0), (2, 32), (1, 33), (3, 34), (4, 37), (5, 40), (6, 48), (7, 48), (8, 49), (9, 51)] (note: demo.py spawns [watch-initial] before [producer-recon-p1]; STAGES[2] activates on '$ [watch-initial]', STAGES[1] on '$ [producer-recon-p1]')
+[PASS] 3b.stages_done_in_order | first_done_order=[(0, 29), (1, 34), (2, 34), (3, 36), (4, 38), (5, 48), (6, 49), (7, 49), (8, 51), (9, 52)]
+[PASS] 3b.no_stage_done_before_its_marker | violations=[] first_done=[(0, 29), (1, 34), (2, 34), (3, 36), (4, 38), (5, 48), (6, 49), (7, 49), (8, 51), (9, 52)]
+[PASS] 3b.midrun_stage5_pending_while_0_1_done | midrun sample #4 t=1.87s states=[2, 2, 2, 1, 0, 0, 0, 0, 0, 0] (stage idx5 'Compaction executed' pending=True; stages 0-1 done=[True, True])
+[PASS] 3c.run_btn_run_disabled_during | btn_run='disabled' at sample #4
+[PASS] 3c.run_btn_stop_normal_during | btn_stop='normal'
+[PASS] 3c.run_status_bar_running_demo | status_left='running: demo'
+[PASS] 4.exit_code_0 | runner.exit_code=0 demo_wall_s=4.26 samples=9
+[FAIL] 4.btn_run_normal_again | btn_run='disabled' (recovery.py:247 _on_event does int(payload); process.py:116 puts ('exit', code, '') -> int('') is ValueError, dispatcher swallows it: _on_exit never runs)
+[FAIL] 4.btn_stop_disabled_again | btn_stop='normal'
+[PASS] 4.all_stages_done | stage_states=[2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+[PASS] 4.progress_label_10_of_10 | progress_label='stages: 10/10'
+[FAIL] 4.result_body_overall_pass_new_id | result_body='Demo is running…' pre_demo_id=20261121-190500-634187
+  INFO exit-finalization diagnostic: page._summary_path=/tmp/watchlab-demo-20261121-190818-636071/demo-summary.json _read_demo_summary() -> demo_id=20261121-190818-636071 overall=PASS verified=15 (but result_body='Demo is running…': _on_exit never ran)
+[PASS] 5.summary_new_demo_id | new_demo_id=20261121-190818-636071 pre_demo_id=20261121-190500-634187 summary_path=/tmp/watchlab-demo-20261121-190818-636071/demo-summary.json
+[PASS] 5.summary_overall_pass | overall='PASS'
+[PASS] 5.summary_total_verified_15 | total_verified_events=15
+[PASS] 5.summary_state_file_recorded | paths.state_file='/tmp/watchlab-demo-20261121-190818-636071/compaction/state.json'
+[PASS] 5.summary_command_shows_gui_args | command='python scripts/demo.py events=5 interval=100ms timeout=30.0' | GUI fields events=5 interval=100ms timeout=30 (runner argv tail: ['scripts/demo.py', '--events', '5', '--interval', '100ms', '--timeout', '30.0'])
+[PASS] 6.reconnect_producer_put_acks_10 | p1_put_acks=5 p2_put_acks=5 total=10
+[PASS] 6.watch_initial_5_events | watch_event_records=5 total_lines=6
+[PASS] 6.watch_resumed_first_is_L_plus_1 | L=6 (last p1 ack revision=6) resumed_first_event_revision=7 L+1=7
+[PASS] 6.recover_after_exactly_1_canceled_1_snapshot | watch_canceled=1 snapshot=1 journal_lines=9
+[PASS] 6.canceled_compact_revision_is_last_p2 | watch_canceled.compact_revision=21 last_p2_ack_revision=21
+[PASS] 6.snapshot_revision_equals_compact_revision | snapshot.snapshot_revision=21 compact_revision=21
+[PASS] 6.state_snapshot_revision | state.snapshot_revision=21 compact_revision=21
+[PASS] 6.state_last_revision_is_last_p3_ack | state.last_revision=26 last_p3_ack_revision=26
+[PASS] 6.state_15_keys | key_count=15
+[PASS] 6.state_per_key_revision_and_sha256_15 | checked=15 (compaction phases 1-3 only; reconnect keys are intentionally absent — recover watches the compaction prefix) keys_match_acks_exactly=True problems=[] revisions: comp_p1_last=16, p2_last=21, p3_last=26; state: R=21 L=26
+[FAIL] 7.btn_inspect_normal | btn_inspect='disabled' (re-enabled only by _on_exit/_show_summary or a later page on_show)
+[PASS] 7.inspector_window_open | _inspector=set winfo_exists=1
+[PASS] 7.metric_snapshot_R | metric_snapshot='21' state.json snapshot_revision=21
+[PASS] 7.metric_last_L | metric_last='26' state.json last_revision=26
+[PASS] 7.metric_keys_15 | metric_keys='15' data_bytes_cell='2,629'
+[PASS] 7.delta_label_mentions_delta_and_changed | delta_label='Watch events were applied after the snapshot: the checkpoint advanced by 5 revision(s) (L 26 − R 21); 5 of 15 key(s) have mod_revision > R.' (L-R=5, changed_keys=5)
+[PASS] 7.path_label_contains_new_demo_id | path_label='/tmp/watchlab-demo-20261121-190818-636071/compaction/state.json  ·  6,135 bytes on disk  ·  updated_at 2026-11'
+[PASS] 7.search_000003_3_keys | count_label='3 key(s)' rows=3 expected_keys=['/watchlab/demo/20261121-190818-636071/compaction/events/phase1/000003', '/watchlab/demo/20261121-190818-636071/compaction/events/phase2/000003', '/watchlab/demo/20261121-190818-636071/compaction/events/phase3/000003']
+[PASS] 7.scope_changed_5_rows_all_tagged | rows=5 count_label='5 key(s)' tags=[('changed',), ('changed',), ('changed',), ('changed',), ('changed',)]
+[PASS] 7.scope_snapshot_10_rows | rows=10 count_label='10 key(s)' tags_sample=[('snapshot',), ('snapshot',)]
+[PASS] 7.value_dialog_opens | new_toplevels=1
+[PASS] 7.value_dialog_text_is_key_json_payload | key=/watchlab/demo/20261121-190818-636071/compaction/events/phase1/000001 dialog_chars=215 pretty_chars=215 equals_state_json_value=True
+[PASS] 7.inspector_closed | winfo_exists=0
+[PASS] 8.tree_single_demo_row_finished_exit0 | rows=1 values(name,status,exit,duration,log)=['demo', 'finished', '0', '4.3s', 'demo-20261121-190818-8f2172.log']
+[PASS] 8.logfile_exists_nonempty_summary_tail | log_file=/home/Komi/projects/watchlab/watchlab-pilot/logs/gui/demo-20261121-190818-8f2172.log size=6773 tree_log_col='demo-20261121-190818-8f2172.log' tail_has_summary=True
+[PASS] 8.output_pane_shows_demo_tail | output_chars=7500 has_summary_block=True
+[PASS] 9.app_closed | app.on_close() done; winfo_exists=False
+[PASS] 10.no_orphan_etcd | pgrep -x etcd -> rc=1 out=''
+[PASS] 10.no_orphan_watchlab_children | pgrep -x watchlab rc=1 out=''; pgrep -af scripts/demo.py rc=1 out=''
+[PASS] 10.demo_client_port_closed_and_2379_down | demo_client_port=60247 listening=False; 2379_listening=False
+TOTAL: 53 PASS / 5 FAIL | exit_code=0
+
+FAIL ANALYSIS (with exact evidence)
+
+F1. 3b.stages_activate_in_index_order_strict — FAIL (deterministic, both runs)
+    Observed first-ACTIVE order (stage, demo-line#):
+      [(0,0), (2,32), (1,33), (3,34), (4,37), (5,40), (6,48), (7,48), (8,49), (9,51)]
+    Stage 2 "Watch created" activates before stage 1 "Producer started".
+    Cause, by design of the mapping: scripts/demo.py spawns the initial watch
+    before the phase-1 producer in the reconnect scenario (demo.log line
+    order: "$ [watch-initial] …" then "$ [producer-recon-p1] …"), while
+    scripts/gui/recovery.py:24-25 maps STAGES[1] activate -> "$
+    [producer-recon-p1]" and STAGES[2] activate -> "$ [watch-initial]".
+    Stages 6 and 7 activate on the same demo line (#48), which is fine.
+    DONE order and DONE-not-before-marker are clean (see PASS lines above).
+
+F2+F3+F4. 4.btn_run_normal_again / 4.btn_stop_disabled_again /
+    4.result_body_overall_pass_new_id — FAIL (deterministic, both runs).
+    After the demo exits with code 0 the Recovery page never finalizes:
+      btn_run='disabled' (expected 'normal')
+      btn_stop='normal'  (expected 'disabled')
+      result_body='Demo is running…' (expected 'demo <id> · overall: PASS …')
+      status bar stays 'running: demo'.
+    Root cause (one line): scripts/gui/process.py:116 puts the runner event
+    ("exit", code, "") but scripts/gui/recovery.py:247 handles it with
+    self._on_exit(int(line)) — int('') raises ValueError, the dispatcher at
+    scripts/gui/app.py:184 swallows it (traceback.print_exc), so
+    RecoveryPage._on_exit never runs. The page had everything it needed:
+    diagnostic right after exit —
+      page._summary_path=/tmp/watchlab-demo-20261121-190818-636071/demo-summary.json
+      page._read_demo_summary() -> demo_id=20261121-190818-636071 overall=PASS verified=15.
+    Everything driven by stdout markers alone works: all 10 stage_states==2,
+    progress 'stages: 10/10', machine-summary path detected. The Logs page
+    (reads runner state directly) is unaffected: 'demo', 'finished', '0'.
+
+F5. 7.btn_inspect_normal — FAIL; direct consequence of F2 (the Inspect
+    button is re-enabled only from _on_exit/_show_summary). _open_inspector()
+    itself works: the inspector opened on the NEW demo's state and all
+    inspector content checks passed.
+
+TRACEBACKS (METHOD requirement "assert no tracebacks" — NOT MET)
+  Exactly 1 Python traceback in stderr, identical in both runs:
+    Traceback (most recent call last):
+      File "/home/Komi/projects/watchlab/watchlab-pilot/scripts/gui/app.py", line 184, in _dispatch_runners
+        listener(kind, ts, payload)
+      File "/home/Komi/projects/watchlab/watchlab-pilot/scripts/gui/recovery.py", line 247, in _on_event
+        self._on_exit(int(line))
+    ValueError: invalid literal for int() with base 10: ''
+  This is F2's bug surfacing (mailbox-swallowed exception, printed by
+  traceback.print_exc). After on_close, stderr also shows benign Tcl
+  teardown noise ("invalid command name …_drain_mailbox/_pulse_step/_tick"):
+  pending after-callbacks of a destroyed app; the _pulse_step job is only
+  cancelled in _on_exit, so F2 keeps it scheduled.
+
+CONCRETE NUMBERS OF THE RECORDED RUN (GUI-started demo 20261121-190818-636071)
+  - Started by the GUI with fields events=5, interval=100ms, timeout=30;
+    runner argv: ['<python3>', 'scripts/demo.py', '--events', '5',
+    '--interval', '100ms', '--timeout', '30.0']; demo wall time 4.26 s
+    (runner exit 0); summary 'command' field:
+    'python scripts/demo.py events=5 interval=100ms timeout=30.0'.
+  - Live log: 9 samples over the run, lens 2148→7998, non-shrinking, 7
+    strict increases; contains 'GUI: starting:' (idx 11) and later '$
+    [producer-recon-p1]' (idx 2783).
+  - Stages: DONE order (stage,line#) = [(0,29),(1,34),(2,34),(3,36),(4,38),
+    (5,48),(6,49),(7,49),(8,51),(9,52)]; every DONE triggered by its own done
+    marker; mid-run sample #4 (t=1.87s) states=[2,2,2,1,0,0,0,0,0,0] — stage
+    5 'Compaction executed' still pending while stages 0-1 done; final
+    [2]*10, 'stages: 10/10'.
+  - Summary: demo_id 20261121-190818-636071 (pre-run id was
+    20261121-190500-634187), overall PASS, total_verified_events 15.
+  - Artifacts (real files, /tmp/watchlab-demo-20261121-190818-636071/):
+    reconnect producer put_acks p1=5 p2=5 (10 total); watch-initial 5
+    watch_events (+1 watch_created line = 6 journal lines); watch-resumed
+    first event_revision 7 == L+1 (L=6 = last p1 ack revision);
+    recover-after.jsonl: 9 lines = exactly 1 watch_canceled
+    (compact_revision=21 == last compaction-p2 ack) + 1 snapshot
+    (snapshot_revision=21) + watch_created/watch_event records;
+    compaction/state.json: snapshot_revision 21 == compact_revision,
+    last_revision 26 == last p3 ack revision, 15 keys, keys == exactly the
+    15 compaction ack keys, per-key mod_revision == producer ack revision
+    and SHA-256(value) == ack value_sha256 for all 15 (problems=[]);
+    producer ack revisions: p1_last=16, p2_last=21, p3_last=26.
+  - Inspector: metric snapshot='21', last='26', keys='15'
+    (data bytes cell '2,629'); delta label: 'Watch events were applied
+    after the snapshot: the checkpoint advanced by 5 revision(s)
+    (L 26 − R 21); 5 of 15 key(s) have mod_revision > R.'; path label
+    contains the new demo id. Search '000003' -> '3 key(s)', 3 rows (one
+    per phase prefix, computed from state.json first). Scope 'changed after
+    snapshot (mod_revision > R)' -> 5 rows, all tagged 'changed'; scope
+    'from snapshot (mod_revision ≤ R)' -> 10 rows tagged 'snapshot'. Value
+    dialog on the first snapshot-scope row
+    (…/compaction/events/phase1/000001): 215 chars, identical to the
+    pretty-printed state.json value (parsed dicts equal).
+  - Logs page: exactly 1 row — name 'demo', status 'finished', exit code 0,
+    duration 4.3s, log 'demo-20261121-190818-8f2172.log'; file
+    logs/gui/demo-20261121-190818-8f2172.log exists, 6773 bytes, tail
+    contains '=== WATCHLAB DEMO SUMMARY ===' and 'overall               :
+    PASS'; output pane shows the demo tail (7500 chars).
+  - Orphan check after on_close (in-drive, GUI already destroyed): pgrep -x
+    etcd -> empty (rc=1); pgrep -x watchlab -> empty (rc=1); pgrep -af
+    'scripts/demo.py' -> empty (rc=1); demo client port 60247 not listening;
+    2379 not listening (`ss -ltn`).
+
+FILES WRITTEN BY THIS VERIFICATION
+  - reports/verification/gui_demo_path_check.txt (this file; the only
+    project-side write, made by the verifier)
+  - /tmp/wl_gui_demo_path.py (drive script, stays in /tmp)
+  - /tmp/wl_gui_demo_path_evidence.json (samples, stage history, orphan raw output)
+  - /tmp/wl_gui_path_out.txt, /tmp/wl_gui_path_err.txt (run 1)
+  - /tmp/wl_gui_path_out2.txt, /tmp/wl_gui_path_err2.txt (run 2, recorded)
+  GUI-owned outputs of the two demo runs (not verifier writes): /tmp/
+  watchlab-demo-20261121-190500-634187/, /tmp/watchlab-demo-20261121-190818-636071/,
+  logs/gui/demo-20261121-190500-009096.log, logs/gui/demo-20261121-190818-8f2172.log.
+
+REMAINING RISKS / NOTES
+  - F2 (int('') on the exit event) is a one-line product bug; until fixed,
+    every GUI-started demo ends with the Recovery page stuck in 'running'
+    visuals (buttons, result card, status bar, pulse) even though the demo
+    itself succeeds and the Logs page reports exit 0.
+  - The activation-order inversion (F1) is cosmetic (order of markers), but
+    if strict index order is desired, STAGES[1]/STAGES[2] activation
+    patterns would need to match the real spawn order.
+  - Statement scope: two runs on one machine, one local Xvfb display; the
+    demo numbers are from this specific demo_id's artifacts, descriptive
+    only, not a benchmark.
